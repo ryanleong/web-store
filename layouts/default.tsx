@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import React from "react";
 
 const DefaultLayout: React.FC<{
@@ -5,6 +6,7 @@ const DefaultLayout: React.FC<{
 }> = ({ children }) => {
   return (
     <>
+      <Header />
       <main>{children}</main>
     </>
   );
