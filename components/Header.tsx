@@ -8,7 +8,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = ({}) => {
   return (
-    <nav className="mb-6 shadow-md">
+    <nav className="mb-4 shadow-md">
       <div className="h-16 container mx-auto px-4 flex items-center">
         <Link className="mr-8" href="/">
           <Image src={LOGO_URL} width={110} height={42} alt="SecretLab Logo" />

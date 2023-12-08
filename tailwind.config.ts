@@ -8,9 +8,12 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      sans: ['"Noto Sans"', 'sans-serif']
+      sans: ['"Figtree"', 'sans-serif']
     },
     extend: {
+      spacing: {
+        '128': '34rem',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
