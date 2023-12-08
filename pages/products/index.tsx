@@ -4,11 +4,11 @@ import { useProductsStore } from "@/store/products";
 import ProductCard from "@/components/ProductCard";
 
 const Products: NextPage<{}> = () => {
-  const { fetchProducts, products } = useProductsStore();
+  const { initProducts, products, isLoadingAll } = useProductsStore();
 
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    initProducts();
+  }, [initProducts]);
 
   const renderProducts = () => {
     return products.map((product) => {
@@ -24,6 +24,10 @@ const Products: NextPage<{}> = () => {
       );
     });
   };
+
+  if (isLoadingAll) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div id="productsPage">

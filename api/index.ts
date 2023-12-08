@@ -20,10 +20,13 @@ type ResponseProducts = {
   limit: number;
 };
 
+type ResponseCategories = Array<string>;
+
 
 type HookApi = {
   fetchProducts: () => Promise<ResponseProducts>;
   fetchProduct: (productId: string) => Promise<ResponseProduct>;
+  fetchCategories: () => Promise<ResponseCategories>;
 };
 
 const useApi = (): HookApi => {
@@ -39,9 +42,16 @@ const useApi = (): HookApi => {
     return data;
   };
 
+  const fetchCategories = async () => {
+    const res = await fetch(`${API_URL}/products/categories`);
+    const data = await res.json();
+    return data;
+  }
+
   return {
     fetchProducts,
     fetchProduct,
+    fetchCategories,
   };
 };
 
