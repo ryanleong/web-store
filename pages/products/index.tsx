@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import { useProductsStore } from "@/store/products";
 import ProductCard from "@/components/ProductCard";
+import ProductsFilters from "@/components/ProductsFilters";
 
 const Products: NextPage<{}> = () => {
   const { initProducts, products, isLoadingAll } = useProductsStore();
@@ -31,7 +32,9 @@ const Products: NextPage<{}> = () => {
 
   return (
     <div id="productsPage">
-      <div className="flex border-b-2 p-4">{/* TODO: filter */}</div>
+      <div className="flex border-b-2 px-4">
+        <ProductsFilters />
+      </div>
 
       <div className="p-4 grid grid-flow-row gap-x-4 gap-y-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:grid-cols-5">
         { renderProducts() }
