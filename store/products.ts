@@ -1,15 +1,25 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
+import useApi from "@/api";
 
 type ProductsStore = {
   products: Array<any>,
   total: number,
-  fetch: (products: Array<any>) => void,
+  fetchProducts: () => void,
   clear: () => void,
 }
 
-export const useCartStore = create<ProductsStore>((set) => ({
-  products: [],
-  total: 0,
-  fetch: (products) => set((state) => ({ products })),
-  clear: () => set({ products: [], total: 0 }),
-}));
+export const useProductsStore = create<ProductsStore>((set) => {
+  const { fetchProducts } = useApi();
+
+  const fetchAllProducts = async () => {
+    const { products } = await fetchProducts();
+    return set(() => ({ products }))
+  };
+
+  return {
+    products: [],
+    total: 0,
+    fetchProducts: fetchAllProducts,
+    clear: () => set({ products: [], total: 0 }),
+  };
+});
