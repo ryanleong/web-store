@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { useProductsStore } from "@/store/products";
-import { useProductsFilterStore } from "@/store/productsFilter";
+import { FilterType } from "@/store/types";
 import { PRODUCT_MAX_PRICE, PRODUCT_RATINGS } from "@/utils/constants";
+import { useStore } from "@/store";
 import ProductsFilterCheckbox from "./ProductsFilterCheckbox";
 import ProductsFilterPrice from "./ProductsFilterPrice";
 import ProductsFilterToggle from "./ProductsFilterToggle";
-import { useRouter } from "next/router";
-import { FilterType } from "@/store/types";
 
 interface ProductsFilterProps {}
 
@@ -28,8 +26,7 @@ const classes = {
 };
 
 const ProductsFilter: React.FC<ProductsFilterProps> = () => {
-  const { categories } = useProductsStore();
-  const { intialiseFilterValues } = useProductsFilterStore();
+  const { categories, intialiseFilterValues } = useStore();
   const [mobileFilterActive, setIsMobileFilterActive] = useState(false);
 
   useEffect(() => {

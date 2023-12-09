@@ -1,8 +1,8 @@
 import React from "react";
 
 import { ValueLabel } from "@/utils/types";
-import { FilterType } from "./types";
-import { useProductsFilterStore } from "@/store/productsFilter";
+import { FilterType } from "@/store/types";
+import { useStore } from "@/store";
 
 export interface ProductsFilterCheckboxProps {
   filterType: FilterType;
@@ -18,7 +18,7 @@ const classes = {
 };
 
 const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (props) => {
-  const { filterValues, setFilterValue } = useProductsFilterStore();
+  const { filterValues, setFilterValue } = useStore();
   const { filterType, items = [] } = props;
   const selectedValue = filterValues[filterType] as Array<string>;
 

@@ -1,38 +1,8 @@
-import { create } from "zustand";
+import { StateCreator } from "zustand";
 
-import { ValueLabel } from "@/utils/types";
-import useApi from "@/api";
+import { FetchAllProductOptions, ProductsSlice } from "./types";
 import { kebabToText } from "@/utils/string";
-
-type Product = {
-  id: number;
-  name: string;
-  brand: string;
-  price: number;
-  image: string;
-  images: Array<string>;
-  stock: number;
-  category: string;
-};
-
-interface Category extends ValueLabel {}
-
-interface FetchAllProductOptions {
-  category?: string;
-}
-
-type ProductsStore = {
-  products: Array<Product>;
-  productsCount: number;
-  categories: Array<Category>;
-
-  isLoadingProducts: boolean;
-  isLoadingCategories: boolean;
-
-  fetchProducts: (options: FetchAllProductOptions) => void;
-  fetchCategories: () => void;
-  clear: () => void;
-};
+import useApi from "@/api";
 
 const defaultValues = {
   products: [],
@@ -44,7 +14,13 @@ const defaultValues = {
   isLoadingCategories: false,
 };
 
-export const useProductsStore = create<ProductsStore>((set) => {
+const createProductsSlice: StateCreator<
+  ProductsSlice,
+  [],
+  [],
+  ProductsSlice
+> = (set) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fetchProducts, fetchCategories } = useApi();
 
   /**
@@ -119,4 +95,6 @@ export const useProductsStore = create<ProductsStore>((set) => {
     fetchCategories: fetchAllCategories,
     clear,
   };
-});
+};
+
+export default createProductsSlice;

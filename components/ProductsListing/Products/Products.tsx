@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 
 import { FilterType } from "@/store/types";
-import { useProductsStore } from "@/store/products";
+import { useStore } from "@/store";
 import ProductCard from "./ProductCard";
-import { useProductsFilterStore } from "@/store/productsFilter";
 
 interface ProductsProps {}
 
@@ -13,9 +12,9 @@ const classes = {
 }
 
 const Products: React.FC<ProductsProps> = () => {
-  const { filterValues } = useProductsFilterStore();
+  const { filterValues } = useStore();
   const category = filterValues[FilterType.CATEGORY];
-  const { fetchProducts, products, isLoadingProducts } = useProductsStore();
+  const { fetchProducts, products, isLoadingProducts } = useStore();
 
   useEffect(() => {
     fetchProducts({ category });

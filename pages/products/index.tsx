@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import React, { useEffect } from "react";
-import { useProductsStore } from "@/store/products";
+
+import { useStore } from "@/store";
 import ProductsFilter from "@/components/ProductsListing/ProductsFilter/ProductsFilter";
 import Products from "@/components/ProductsListing/Products/Products";
 
@@ -12,7 +13,7 @@ const classes = {
 }
 
 const ProductsPage: NextPage<{}> = () => {
-  const { productsCount, fetchCategories, isLoadingCategories } = useProductsStore();
+  const { productsCount, fetchCategories, isLoadingCategories } = useStore();
 
   useEffect(() => {
     fetchCategories();

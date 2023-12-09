@@ -1,9 +1,8 @@
 import React from "react";
 
-import { ValueLabel } from "@/utils/types";
 import { FilterType } from "@/store/types";
-import { useProductsFilterStore } from "@/store/productsFilter";
-import { useRouter } from "next/router";
+import { ValueLabel } from "@/utils/types";
+import { useStore } from "@/store";
 
 interface ProductsFilterToggleProps {
   filterType: FilterType;
@@ -19,8 +18,7 @@ const classes = {
 };
 
 const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
-  const router = useRouter();
-  const { filterValues, setFilterValue } = useProductsFilterStore();
+  const { filterValues, setFilterValue } = useStore();
 
   const { filterType, items = [] } = props;
   const selectedValue = filterValues[filterType];
