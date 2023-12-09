@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { FilterType } from "@/store/types";
-import { PRODUCT_MAX_PRICE, PRODUCT_RATINGS } from "@/utils/constants";
+import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from "@/utils/constants";
 import { useStore } from "@/store";
 import ProductsFilterCheckbox from "./ProductsFilterCheckbox";
 import ProductsFilterPrice from "./ProductsFilterPrice";
@@ -63,7 +63,7 @@ const ProductsFilter: React.FC<ProductsFilterProps> = () => {
 
           <ProductsFilterPrice
             filterType={FilterType.PRICE}
-            items={PRODUCT_MAX_PRICE}
+            items={PRODUCT_PRICE_RANGE}
           />
         </div>
 

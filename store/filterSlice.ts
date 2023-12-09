@@ -1,18 +1,27 @@
 import { StateCreator } from "zustand";
-import { FilterSlice, FilterType, IntialiseFilterValues, SetFilterValue } from "./types";
-import { PRODUCT_MAX_PRICE, PRODUCT_RATINGS } from "@/utils/constants";
+import {
+  FilterSlice,
+  FilterType,
+  IntialiseFilterValues,
+  ProductsSlice,
+  SetFilterValue,
+} from "./types";
+import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from "@/utils/constants";
+import { getFilteredProducts } from "@/utils/product";
 
-const createFilterSlice: StateCreator<FilterSlice, [], [], FilterSlice> = (
-  set
-) => {
-
+const createFilterSlice: StateCreator<
+  FilterSlice & ProductsSlice,
+  [],
+  [],
+  FilterSlice
+> = (set) => {
   const intialiseFilterValues: IntialiseFilterValues = () => {
     const initialRatingValues = PRODUCT_RATINGS.map(({ value }) => value);
-    const initialPriceValues = PRODUCT_MAX_PRICE.map(({ value }) => value);
+    const initialPriceValues = PRODUCT_PRICE_RANGE.map(({ value }) => value);
 
     set(() => ({
       filterValues: {
-        [FilterType.CATEGORY]: '',
+        [FilterType.CATEGORY]: "",
         [FilterType.RATING]: initialRatingValues,
         [FilterType.PRICE]: initialPriceValues,
       },
@@ -20,12 +29,21 @@ const createFilterSlice: StateCreator<FilterSlice, [], [], FilterSlice> = (
   };
 
   const setFilterValue: SetFilterValue = (filterType, value) => {
-    set((state) => ({
-      filterValues: {
+    set((state) => {
+      const { products } = state;
+      const filterValues = {
         ...state.filterValues,
         [filterType]: value,
-      },
-    }));
+      };
+
+      // Filter products based on the selected filters
+      const filteredProducts = getFilteredProducts(products, filterValues);
+
+      return {
+        filteredProducts,
+        filterValues,
+      };
+    });
   };
 
   return {

@@ -40,6 +40,7 @@ export type Product = {
   images: Array<string>;
   stock: number;
   category: string;
+  rating: number,
 };
 export interface Category extends ValueLabel {}
 
@@ -49,6 +50,7 @@ export interface FetchAllProductOptions {
 
 export type ProductsSlice = {
   products: Array<Product>;
+  filteredProducts: Array<Product>;
   productsCount: number;
   categories: Array<Category>;
 

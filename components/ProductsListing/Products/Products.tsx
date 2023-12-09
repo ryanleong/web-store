@@ -12,16 +12,19 @@ const classes = {
 }
 
 const Products: React.FC<ProductsProps> = () => {
-  const { filterValues } = useStore();
+  const { filterValues, fetchProducts, filteredProducts, isLoadingProducts } = useStore();
   const category = filterValues[FilterType.CATEGORY];
-  const { fetchProducts, products, isLoadingProducts } = useStore();
 
   useEffect(() => {
     fetchProducts({ category });
   }, [category]);
 
+  /**
+   * Renders the products based on the filter values
+   * @returns void
+   */
   const renderProducts = () => {
-    return products.map((product) => {
+    return filteredProducts.map((product) => {
       return (
         <ProductCard
           key={product.id}
@@ -35,13 +38,33 @@ const Products: React.FC<ProductsProps> = () => {
     });
   };
 
+  const renderNoProducts = () => {
+    return (
+      <div className="flex justify-center">
+        <h2>No Products Found</h2>
+      </div>
+    )
+  }
+
   if (isLoadingProducts) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full flex justify-center mt-40">
+        <h2>Loading...</h2>
+      </div>
+    )
+  }
+
+  if (filteredProducts.length === 0) {
+    return (
+      <div className="w-full flex justify-center mt-40">
+        <h2>No Products Found</h2>
+      </div>
+    )
   }
 
   return (
     <div className={`${classes.productsWrapper} ${classes.productsWrapperDesktop}`}>
-      { renderProducts() }
+      { renderProducts()}
     </div>
   )
 };

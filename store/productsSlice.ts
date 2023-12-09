@@ -1,11 +1,13 @@
 import { StateCreator } from "zustand";
 
-import { FetchAllProductOptions, ProductsSlice } from "./types";
+import { FetchAllProductOptions, FilterSlice, ProductsSlice } from "./types";
 import { kebabToText } from "@/utils/string";
 import useApi from "@/api";
+import { getFilteredProducts } from "@/utils/product";
 
 const defaultValues = {
   products: [],
+  filteredProducts: [],
   categories: [],
   productsCount: 0,
 
@@ -15,7 +17,7 @@ const defaultValues = {
 };
 
 const createProductsSlice: StateCreator<
-  ProductsSlice,
+  ProductsSlice & FilterSlice,
   [],
   [],
   ProductsSlice
@@ -44,14 +46,25 @@ const createProductsSlice: StateCreator<
         images: product.images,
         stock: product.stock,
         category: product.category,
+        rating: product.rating,
       }));
 
-      set(() => ({
-        products: formattedProducts,
-        isLoadingProducts: false,
-        // NOTE: using limit as we don't have pagination and its the current total
-        productsCount: limit,
-      }));
+      set((state) => {
+        const filteredProducts = getFilteredProducts(
+          formattedProducts,
+          state.filterValues
+        );
+
+        return {
+          products: formattedProducts,
+          filteredProducts,
+          isLoadingProducts: false,
+          // NOTE: using limit as we don't have pagination and its the current total
+          productsCount: limit,
+        };
+      });
+
+      // updateFilteredProducts();
       return formattedProducts;
     } catch (error) {
       console.log("Error: ", error);

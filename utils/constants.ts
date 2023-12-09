@@ -25,7 +25,7 @@ export const PRODUCT_RATINGS = [
   }
 ];
 
-export const PRODUCT_MAX_PRICE = [
+export const PRODUCT_PRICE_RANGE = [
   {
     value: '0-100',
     label: '< $100',
