@@ -83,4 +83,6 @@ export type CartSlice = {
   addItemToCart: AddItemToCart;
   removeItemFromCart: RemoveItemFromCart;
   updateCartItemQuantity: UpdateCartItemQuantity;
+  getCartItemCount: () => number;
+
 };

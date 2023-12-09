@@ -1,12 +1,16 @@
 import { StateCreator } from "zustand";
 import { AddItemToCart, CartSlice, RemoveItemFromCart, UpdateCartItemQuantity } from "./types";
 
-const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (set) => {
+const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (set, get) => {
   /**
    * Add item to cart
    * @param product
    */
   const addItemToCart: AddItemToCart = (product, quantity = 1) => {
+    // API call would be made here to persist the cart items.
+    // For this demo, we will just store the cart items in memory
+    // as the mock API does not persist the data
+
     set((state) => {
       const { cartItems } = state;
 
@@ -40,6 +44,10 @@ const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (set) => {
    * @param productId
    */
   const removeItemFromCart: RemoveItemFromCart = (productId) => {
+    // API call would be made here to persist the cart items.
+    // For this demo, we will just store the cart items in memory
+    // as the mock API does not persist the data
+
     set((state) => {
       const { cartItems } = state;
 
@@ -57,6 +65,10 @@ const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (set) => {
    * @param quantity
    */
   const updateCartItemQuantity: UpdateCartItemQuantity = (productId, quantity) => {
+    // API call would be made here to persist the cart items.
+    // For this demo, we will just store the cart items in memory
+    // as the mock API does not persist the data
+
     set((state) => {
       const { cartItems } = state;
 
@@ -71,11 +83,19 @@ const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (set) => {
     });
   };
 
+  const getCartItemCount = () => {
+    const cartItems = get().cartItems;
+    const total = cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
+
+    return total;
+  }
+
   return {
     cartItems: [],
     addItemToCart,
     removeItemFromCart,
     updateCartItemQuantity,
+    getCartItemCount,
   };
 };
 
