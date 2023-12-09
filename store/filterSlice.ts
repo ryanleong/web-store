@@ -19,13 +19,21 @@ const createFilterSlice: StateCreator<
     const initialRatingValues = PRODUCT_RATINGS.map(({ value }) => value);
     const initialPriceValues = PRODUCT_PRICE_RANGE.map(({ value }) => value);
 
-    set(() => ({
-      filterValues: {
+    set((state) => {
+      const { products } = state;
+      const filterValues = {
         [FilterType.CATEGORY]: "",
         [FilterType.RATING]: initialRatingValues,
         [FilterType.PRICE]: initialPriceValues,
-      },
-    }));
+      }
+      const filteredProducts = getFilteredProducts(products, filterValues);
+
+      return {
+        filterValues,
+        filteredProducts,
+        productsCount: filteredProducts.length,
+      }
+    });
   };
 
   const setFilterValue: SetFilterValue = (filterType, value) => {
@@ -36,7 +44,6 @@ const createFilterSlice: StateCreator<
         [filterType]: value,
       };
 
-      // Filter products based on the selected filters
       const filteredProducts = getFilteredProducts(products, filterValues);
 
       return {

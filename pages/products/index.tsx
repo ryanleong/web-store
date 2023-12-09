@@ -27,8 +27,6 @@ const ProductsPage: NextPage<{}> = () => {
     <div id="productsPage" className={classes.wrapper}>
       <div className={classes.header}>
         <h1 className={classes.title}>Products ({productsCount})</h1>
-
-        {/* TODO: <Sort /> */}
       </div>
 
       <div className={classes.content}>
