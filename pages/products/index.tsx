@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-
+import React, { useEffect } from "react";
+import { useProductsStore } from "@/store/products";
 import ProductsFilter from "@/components/ProductsListing/ProductsFilter/ProductsFilter";
 import Products from "@/components/ProductsListing/Products/Products";
-import { useProductsStore } from "@/store/products";
 
 const classes = {
   wrapper: 'py-8',
@@ -12,7 +12,15 @@ const classes = {
 }
 
 const ProductsPage: NextPage<{}> = () => {
-  const { productsCount } = useProductsStore();
+  const { productsCount, fetchCategories, isLoadingCategories } = useProductsStore();
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  if (isLoadingCategories) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div id="productsPage" className={classes.wrapper}>

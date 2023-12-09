@@ -17,17 +17,19 @@ type Product = {
 
 interface Category extends ValueLabel {}
 
+interface FetchAllProductOptions {
+  category?: string;
+}
+
 type ProductsStore = {
   products: Array<Product>;
   productsCount: number;
   categories: Array<Category>;
 
-  isLoadingAll: boolean;
   isLoadingProducts: boolean;
   isLoadingCategories: boolean;
 
-  initProducts: () => void;
-  fetchProducts: () => void;
+  fetchProducts: (options: FetchAllProductOptions) => void;
   fetchCategories: () => void;
   clear: () => void;
 };
@@ -40,7 +42,7 @@ const defaultValues = {
   isLoadingAll: false,
   isLoadingProducts: false,
   isLoadingCategories: false,
-}
+};
 
 export const useProductsStore = create<ProductsStore>((set) => {
   const { fetchProducts, fetchCategories } = useApi();
@@ -50,10 +52,12 @@ export const useProductsStore = create<ProductsStore>((set) => {
    * @param isProxyCall boolean To indicate if its a call from another action
    * @returns void
    */
-  const fetchAllProducts = async (isProxyCall = false) => {
+  const fetchAllProducts = async (options: FetchAllProductOptions) => {
+    const { category } = options;
+
     try {
       set(() => ({ isLoadingProducts: true }));
-      const { products, limit } = await fetchProducts();
+      const { products, limit } = await fetchProducts({ category });
 
       const formattedProducts = products.map((product) => ({
         id: product.id,
@@ -74,8 +78,7 @@ export const useProductsStore = create<ProductsStore>((set) => {
       }));
       return formattedProducts;
     } catch (error) {
-      if (isProxyCall) throw error;
-      else console.log("Error: ", error);
+      console.log("Error: ", error);
     }
   };
 
@@ -84,7 +87,7 @@ export const useProductsStore = create<ProductsStore>((set) => {
    * @param isProxyCall boolean To indicate if its a call from another action
    * @returns void
    */
-  const fetchAllCategories = async (isProxyCall = false) => {
+  const fetchAllCategories = async () => {
     try {
       set(() => ({ isLoadingCategories: true }));
       const categories = await fetchCategories();
@@ -100,32 +103,18 @@ export const useProductsStore = create<ProductsStore>((set) => {
       }));
       return categories;
     } catch (error) {
-      if (isProxyCall) throw error;
-      else console.log("Error: ", error);
-    }
-  };
-
-  /**
-   * Fetch list of products and categories from API
-   * @returns void
-   */
-  const initProducts = async () => {
-    try {
-      set(() => ({ isLoadingAll: true }));
-
-      await Promise.all([fetchAllCategories(true), fetchAllProducts(true)]);
-
-      set(() => ({ isLoadingAll: false }));
-    } catch (error) {
       console.log("Error: ", error);
     }
   };
 
+  /**
+   *  Reset product data
+   * @returns void
+   */
   const clear = () => set({ ...defaultValues });
 
   return {
     ...defaultValues,
-    initProducts,
     fetchProducts: fetchAllProducts,
     fetchCategories: fetchAllCategories,
     clear,

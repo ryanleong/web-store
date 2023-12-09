@@ -22,16 +22,22 @@ type ResponseProducts = {
 
 type ResponseCategories = Array<string>;
 
+type FetchProductsOptions = {
+  category?: string;
+}
 
 type HookApi = {
-  fetchProducts: () => Promise<ResponseProducts>;
+  fetchProducts: (options: FetchProductsOptions) => Promise<ResponseProducts>;
   fetchProduct: (productId: string) => Promise<ResponseProduct>;
   fetchCategories: () => Promise<ResponseCategories>;
 };
 
 const useApi = (): HookApi => {
-  const fetchProducts = async () => {
-    const res = await fetch(`${API_URL}/products`);
+  const fetchProducts = async (options: FetchProductsOptions) => {
+    const { category } = options;
+    const categoryPath = category ? `/category/${category}` : '';
+
+    const res = await fetch(`${API_URL}/products${categoryPath}`);
     const data = await res.json();
     return data;
   };

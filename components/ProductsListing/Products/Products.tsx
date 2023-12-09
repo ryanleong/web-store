@@ -1,6 +1,9 @@
-import { useProductsStore } from "@/store/products";
 import React, { useEffect } from "react";
+
+import { FilterType } from "@/store/types";
+import { useProductsStore } from "@/store/products";
 import ProductCard from "./ProductCard";
+import { useProductsFilterStore } from "@/store/productsFilter";
 
 interface ProductsProps {}
 
@@ -10,11 +13,13 @@ const classes = {
 }
 
 const Products: React.FC<ProductsProps> = () => {
-  const { initProducts, products, isLoadingAll } = useProductsStore();
+  const { filterValues } = useProductsFilterStore();
+  const category = filterValues[FilterType.CATEGORY];
+  const { fetchProducts, products, isLoadingProducts } = useProductsStore();
 
   useEffect(() => {
-    initProducts();
-  }, [initProducts]);
+    fetchProducts({ category });
+  }, [category]);
 
   const renderProducts = () => {
     return products.map((product) => {
@@ -31,7 +36,7 @@ const Products: React.FC<ProductsProps> = () => {
     });
   };
 
-  if (isLoadingAll) {
+  if (isLoadingProducts) {
     return <div>Loading...</div>;
   }
 

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+
 import { ValueLabel } from "@/utils/types";
 import { FilterType } from "./types";
+import { useProductsFilterStore } from "@/store/productsFilter";
 
 export interface ProductsFilterCheckboxProps {
   filterType: FilterType;
@@ -8,7 +10,7 @@ export interface ProductsFilterCheckboxProps {
 }
 
 const classes = {
-  wrapper: "border-b-2 last:border-b-0 mb-4",
+  wrapper: "border-b-2 mb-4 w-full",
   title: "font-semibold mb-3.5 uppercase",
   fieldSet: "flex flex-col mb-4",
   inputWrapper: "flex align-center cursor-pointer",
@@ -16,19 +18,15 @@ const classes = {
 };
 
 const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (props) => {
+  const { filterValues, setFilterValue } = useProductsFilterStore();
   const { filterType, items = [] } = props;
-  const [selectedValue, setSelectedValue] = useState<Array<string>>([]);
-
-  useEffect(() => {
-    const initialValues = items.map(({value}) => value);
-    setSelectedValue(initialValues);
-  }, [items]);
+  const selectedValue = filterValues[filterType] as Array<string>;
 
   const updatesSelectedValue = (value: string) => {
     if (selectedValue.includes(value)) {
-      setSelectedValue(selectedValue.filter((item) => item !== value));
+      setFilterValue(filterType, selectedValue.filter((item) => item !== value));
     } else {
-      setSelectedValue([...selectedValue, value]);
+      setFilterValue(filterType, [...selectedValue, value]);
     }
   }
 

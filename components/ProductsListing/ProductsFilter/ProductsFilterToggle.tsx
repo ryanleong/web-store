@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { ValueLabel } from "@/utils/types";
-import { FilterType } from "./types";
+import React from "react";
 
-interface ProductsFilterRadioProps {
+import { ValueLabel } from "@/utils/types";
+import { FilterType } from "@/store/types";
+import { useProductsFilterStore } from "@/store/productsFilter";
+import { useRouter } from "next/router";
+
+interface ProductsFilterToggleProps {
   filterType: FilterType;
   items: Array<ValueLabel>;
 }
@@ -15,31 +18,30 @@ const classes = {
   inputLabel: "capitalize",
 };
 
-const ProductsFilterRadio: React.FC<ProductsFilterRadioProps> = (props) => {
+const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
+  const router = useRouter();
+  const { filterValues, setFilterValue } = useProductsFilterStore();
+
   const { filterType, items = [] } = props;
-  const [selectedValue, setSelectedValue] = useState("");
+  const selectedValue = filterValues[filterType];
+
+  const updateFilterValue = (value: string) => {
+    const updatedValue = selectedValue === value ? "" : value;
+    setFilterValue(filterType, updatedValue);
+  }
 
   const renderItems = () => {
-    return items.map(({value, label}) => {
+    return items.map(({ value, label }) => {
       return (
         <div key={value} className={classes.inputWrapper}>
-          <input
-            type="radio"
-            id={`${value}`}
-            name={filterType}
-            value={value}
-            hidden
-            checked={selectedValue === value}
-            onChange={(e) => setSelectedValue(e.target.value)}
-          />
-          <label
-            htmlFor={`${value}`}
+          <button
             className={`${classes.inputLabel} ${
               selectedValue === value ? "text-red-800" : ""
             }`}
+            onClick={() => updateFilterValue(value)}
           >
             {label}
-          </label>
+          </button>
         </div>
       );
     });
@@ -53,4 +55,4 @@ const ProductsFilterRadio: React.FC<ProductsFilterRadioProps> = (props) => {
   );
 };
 
-export default ProductsFilterRadio;
+export default ProductsFilterToggle;
