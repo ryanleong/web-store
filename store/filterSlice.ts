@@ -40,8 +40,9 @@ const createFilterSlice: StateCreator<
       const filteredProducts = getFilteredProducts(products, filterValues);
 
       return {
-        filteredProducts,
         filterValues,
+        filteredProducts,
+        productsCount: filteredProducts.length,
       };
     });
   };

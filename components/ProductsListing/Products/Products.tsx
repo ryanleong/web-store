@@ -8,7 +8,8 @@ interface ProductsProps {}
 
 const classes = {
   productsWrapper: 'px-0 grid grid-flow-row gap-x-4 gap-y-8 grid-cols-2',
-  productsWrapperDesktop: 'lg:w-screen lg:px-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3',
+  productsWrapperDesktop: 'md:w-screen md:px-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
+  loaderWrapper: 'w-full flex justify-center mt-40',
 }
 
 const Products: React.FC<ProductsProps> = () => {
@@ -33,22 +34,15 @@ const Products: React.FC<ProductsProps> = () => {
           brand={product.brand}
           image={product.image}
           price={product.price}
+          discountPercentage={product.discountPercentage}
         />
       );
     });
   };
 
-  const renderNoProducts = () => {
-    return (
-      <div className="flex justify-center">
-        <h2>No Products Found</h2>
-      </div>
-    )
-  }
-
   if (isLoadingProducts) {
     return (
-      <div className="w-full flex justify-center mt-40">
+      <div className={classes.loaderWrapper}>
         <h2>Loading...</h2>
       </div>
     )
@@ -56,7 +50,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   if (filteredProducts.length === 0) {
     return (
-      <div className="w-full flex justify-center mt-40">
+      <div className={classes.loaderWrapper}>
         <h2>No Products Found</h2>
       </div>
     )

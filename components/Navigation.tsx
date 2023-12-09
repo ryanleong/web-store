@@ -3,13 +3,15 @@ import Link from "next/link";
 
 interface NavigationProps {}
 
+const classes = {
+  wrapper: "ml-auto",
+  content: "flex space-x-4",
+};
+
 const Navigation: React.FC<NavigationProps> = ({}) => {
   return (
-    <div className="ml-auto">
-      <ul className="flex space-x-4">
-        <li>
-          <Link href="/">Home</Link>
-        </li>
+    <div className={classes.wrapper}>
+      <ul className={classes.content}>
         <li>
           <Link href="/products">Products</Link>
         </li>

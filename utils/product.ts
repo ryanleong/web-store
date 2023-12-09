@@ -51,4 +51,43 @@ const getFilteredProducts = (
   });
 };
 
-export { isInRating, isInPriceRange, getFilteredProducts };
+/**
+ * Convert product API response to product Object
+ * @param product
+ * @returns
+ */
+const productResponseToProduct = (product: any): Product => ({
+  id: product.id,
+  name: product.title,
+  brand: product.brand,
+  price: product.price,
+  image: product.thumbnail,
+  images: product.images,
+  stock: product.stock,
+  category: product.category,
+  rating: product.rating,
+  description: product.description,
+  discountPercentage: product.discountPercentage,
+});
+
+/**
+ * Calculate discounted price
+ * @param price
+ * @param discountPercentage
+ * @returns
+ */
+const calculateDiscountedPrice = (
+  price: number,
+  discountPercentage: number
+) => {
+  const discountdedPrice = price - (price * discountPercentage) / 100;
+  return Math.round((discountdedPrice + Number.EPSILON) * 100) / 100;
+};
+
+export {
+  isInRating,
+  isInPriceRange,
+  getFilteredProducts,
+  productResponseToProduct,
+  calculateDiscountedPrice,
+};

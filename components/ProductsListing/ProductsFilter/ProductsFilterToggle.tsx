@@ -10,11 +10,11 @@ interface ProductsFilterToggleProps {
 }
 
 const classes = {
-  wrapper: "border-b-2 last:border-b-0 mb-4",
+  wrapper: "border-b-2 mb-4 w-full",
   title: "font-semibold mb-3.5 uppercase",
   fieldSet: "flex flex-col mb-4",
   inputWrapper: "cursor-pointer",
-  inputLabel: "capitalize",
+  label: "capitalize",
 };
 
 const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
@@ -33,7 +33,7 @@ const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
       return (
         <div key={value} className={classes.inputWrapper}>
           <button
-            className={`${classes.inputLabel} ${
+            className={`${classes.label} ${
               selectedValue === value ? "text-red-800" : ""
             }`}
             onClick={() => updateFilterValue(value)}

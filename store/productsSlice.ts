@@ -3,7 +3,7 @@ import { StateCreator } from "zustand";
 import { FetchAllProductOptions, FilterSlice, ProductsSlice } from "./types";
 import { kebabToText } from "@/utils/string";
 import useApi from "@/api";
-import { getFilteredProducts } from "@/utils/product";
+import { getFilteredProducts, productResponseToProduct } from "@/utils/product";
 
 const defaultValues = {
   products: [],
@@ -21,7 +21,7 @@ const createProductsSlice: StateCreator<
   [],
   [],
   ProductsSlice
-> = (set) => {
+> = (set, get) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fetchProducts, fetchCategories } = useApi();
 
@@ -36,18 +36,7 @@ const createProductsSlice: StateCreator<
     try {
       set(() => ({ isLoadingProducts: true }));
       const { products, limit } = await fetchProducts({ category });
-
-      const formattedProducts = products.map((product) => ({
-        id: product.id,
-        name: product.title,
-        brand: product.brand,
-        price: product.price,
-        image: product.thumbnail,
-        images: product.images,
-        stock: product.stock,
-        category: product.category,
-        rating: product.rating,
-      }));
+      const formattedProducts = products.map(productResponseToProduct);
 
       set((state) => {
         const filteredProducts = getFilteredProducts(
@@ -60,7 +49,7 @@ const createProductsSlice: StateCreator<
           filteredProducts,
           isLoadingProducts: false,
           // NOTE: using limit as we don't have pagination and its the current total
-          productsCount: limit,
+          productsCount: filteredProducts.length,
         };
       });
 
@@ -106,6 +95,7 @@ const createProductsSlice: StateCreator<
     ...defaultValues,
     fetchProducts: fetchAllProducts,
     fetchCategories: fetchAllCategories,
+    getProductById: (id: string) => get().products.find((p) => `${p.id}` === id),
     clear,
   };
 };

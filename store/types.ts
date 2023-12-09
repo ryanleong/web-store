@@ -36,11 +36,13 @@ export type Product = {
   name: string;
   brand: string;
   price: number;
+  discountPercentage: number;
   image: string;
   images: Array<string>;
   stock: number;
   category: string;
   rating: number,
+  description: string;
 };
 export interface Category extends ValueLabel {}
 
@@ -60,4 +62,6 @@ export type ProductsSlice = {
   fetchProducts: (options: FetchAllProductOptions) => void;
   fetchCategories: () => void;
   clear: () => void;
+
+  getProductById: (id: string) => Product | undefined;
 };
