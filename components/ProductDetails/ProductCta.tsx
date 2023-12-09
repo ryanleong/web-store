@@ -1,10 +1,11 @@
-import {
-  MAX_PURCHASE_QUANTITY,
-  MIN_PURCHASE_QUANTITY,
-} from "@/utils/constants";
+import { useStore } from "@/store";
+import { Product } from "@/store/types";
+import { MIN_PURCHASE_QUANTITY } from "@/utils/constants";
 import React, { useState } from "react";
 
-interface ProductCtaProps {}
+interface ProductCtaProps {
+  product: Product;
+}
 
 const classes = {
   wrapper: "mt-10 lg:mt-20",
@@ -18,6 +19,8 @@ const classes = {
 };
 
 const ProductCta: React.FC<ProductCtaProps> = (props) => {
+  const { product } = props;
+  const { addItemToCart } = useStore();
   const [quantity, setQuantity] = useState(1);
 
   const updateQuantity = (value: number) => {
@@ -25,8 +28,6 @@ const ProductCta: React.FC<ProductCtaProps> = (props) => {
 
     if (newQuantity < MIN_PURCHASE_QUANTITY) {
       setQuantity(MIN_PURCHASE_QUANTITY);
-    } else if (newQuantity > MAX_PURCHASE_QUANTITY) {
-      setQuantity(MAX_PURCHASE_QUANTITY);
     } else {
       setQuantity(newQuantity);
     }
@@ -48,6 +49,7 @@ const ProductCta: React.FC<ProductCtaProps> = (props) => {
             type="number"
             className={classes.stepperUpValue}
             value={quantity}
+            disabled
           />
           <button
             className={classes.stepperUpButton}
@@ -58,7 +60,12 @@ const ProductCta: React.FC<ProductCtaProps> = (props) => {
         </div>
       </div>
 
-      <button className={classes.ctaButton}>Add to cart</button>
+      <button
+        onClick={() => addItemToCart(product, quantity)}
+        className={classes.ctaButton}
+      >
+        Add to cart
+      </button>
     </div>
   );
 };

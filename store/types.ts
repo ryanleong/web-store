@@ -65,3 +65,22 @@ export type ProductsSlice = {
 
   getProductById: (id: string) => Product | undefined;
 };
+
+/**
+ * Cart Types
+ */
+export type CartItem = {
+  product: Product;
+  quantity: number;
+}
+
+export type AddItemToCart = (product: Product, quantity?: number) => void;
+export type RemoveItemFromCart = (productId: number) => void;
+export type UpdateCartItemQuantity = (productId: number, quantity: number) => void;
+
+export type CartSlice = {
+  cartItems: Array<CartItem>;
+  addItemToCart: AddItemToCart;
+  removeItemFromCart: RemoveItemFromCart;
+  updateCartItemQuantity: UpdateCartItemQuantity;
+};

@@ -61,7 +61,7 @@ const ProductContent: React.FC<ProductContentProps> = (props) => {
 
       <p>{description}</p>
 
-      <ProductCta />
+      <ProductCta product={product}/>
     </>
   )
 };
