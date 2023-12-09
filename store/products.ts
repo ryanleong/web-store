@@ -1,5 +1,8 @@
 import { create } from "zustand";
+
+import { ValueLabel } from "@/utils/types";
 import useApi from "@/api";
+import { kebabToText } from "@/utils/string";
 
 type Product = {
   id: number;
@@ -12,9 +15,12 @@ type Product = {
   category: string;
 };
 
+interface Category extends ValueLabel {}
+
 type ProductsStore = {
   products: Array<Product>;
-  categories: Array<string>;
+  productsCount: number;
+  categories: Array<Category>;
 
   isLoadingAll: boolean;
   isLoadingProducts: boolean;
@@ -25,6 +31,16 @@ type ProductsStore = {
   fetchCategories: () => void;
   clear: () => void;
 };
+
+const defaultValues = {
+  products: [],
+  categories: [],
+  productsCount: 0,
+
+  isLoadingAll: false,
+  isLoadingProducts: false,
+  isLoadingCategories: false,
+}
 
 export const useProductsStore = create<ProductsStore>((set) => {
   const { fetchProducts, fetchCategories } = useApi();
@@ -37,7 +53,7 @@ export const useProductsStore = create<ProductsStore>((set) => {
   const fetchAllProducts = async (isProxyCall = false) => {
     try {
       set(() => ({ isLoadingProducts: true }));
-      const { products } = await fetchProducts();
+      const { products, limit } = await fetchProducts();
 
       const formattedProducts = products.map((product) => ({
         id: product.id,
@@ -50,7 +66,12 @@ export const useProductsStore = create<ProductsStore>((set) => {
         category: product.category,
       }));
 
-      set(() => ({ products: formattedProducts, isLoadingProducts: false }));
+      set(() => ({
+        products: formattedProducts,
+        isLoadingProducts: false,
+        // NOTE: using limit as we don't have pagination and its the current total
+        productsCount: limit,
+      }));
       return formattedProducts;
     } catch (error) {
       if (isProxyCall) throw error;
@@ -58,7 +79,7 @@ export const useProductsStore = create<ProductsStore>((set) => {
     }
   };
 
-    /**
+  /**
    * Fetch list of categories from API
    * @param isProxyCall boolean To indicate if its a call from another action
    * @returns void
@@ -67,7 +88,16 @@ export const useProductsStore = create<ProductsStore>((set) => {
     try {
       set(() => ({ isLoadingCategories: true }));
       const categories = await fetchCategories();
-      set(() => ({ categories, isLoadingCategories: false }));
+
+      const formattedCategory = categories.map((category) => ({
+        value: category,
+        label: kebabToText(category),
+      }));
+
+      set(() => ({
+        categories: formattedCategory,
+        isLoadingCategories: false,
+      }));
       return categories;
     } catch (error) {
       if (isProxyCall) throw error;
@@ -75,7 +105,7 @@ export const useProductsStore = create<ProductsStore>((set) => {
     }
   };
 
-    /**
+  /**
    * Fetch list of products and categories from API
    * @returns void
    */
@@ -83,10 +113,7 @@ export const useProductsStore = create<ProductsStore>((set) => {
     try {
       set(() => ({ isLoadingAll: true }));
 
-      await Promise.all([
-        fetchAllCategories(true),
-        fetchAllProducts(true),
-      ]);
+      await Promise.all([fetchAllCategories(true), fetchAllProducts(true)]);
 
       set(() => ({ isLoadingAll: false }));
     } catch (error) {
@@ -94,17 +121,13 @@ export const useProductsStore = create<ProductsStore>((set) => {
     }
   };
 
+  const clear = () => set({ ...defaultValues });
+
   return {
-    products: [],
-    categories: [],
-
-    isLoadingAll: false,
-    isLoadingProducts: false,
-    isLoadingCategories: false,
-
+    ...defaultValues,
     initProducts,
     fetchProducts: fetchAllProducts,
     fetchCategories: fetchAllCategories,
-    clear: () => set({ products: [], categories: [] }),
+    clear,
   };
 });

@@ -5,8 +5,11 @@ interface NavigationProps {}
 
 const Navigation: React.FC<NavigationProps> = ({}) => {
   return (
-    <div id="nav-items">
+    <div className="ml-auto">
       <ul className="flex space-x-4">
+        <li>
+          <Link href="/">Home</Link>
+        </li>
         <li>
           <Link href="/products">Products</Link>
         </li>

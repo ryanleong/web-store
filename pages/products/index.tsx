@@ -1,46 +1,33 @@
-import { useEffect } from "react";
 import type { NextPage } from "next";
+
+import ProductsFilter from "@/components/ProductsListing/ProductsFilter/ProductsFilter";
+import Products from "@/components/ProductsListing/Products/Products";
 import { useProductsStore } from "@/store/products";
-import ProductCard from "@/components/ProductCard";
-import ProductsFilters from "@/components/ProductsFilters";
 
-const Products: NextPage<{}> = () => {
-  const { initProducts, products, isLoadingAll } = useProductsStore();
+const classes = {
+  wrapper: 'py-8',
+  header: 'flex align-middle px-4 mb-4',
+  title: 'text-2xl',
+  content: 'relative w-full flex px-4',
+}
 
-  useEffect(() => {
-    initProducts();
-  }, [initProducts]);
-
-  const renderProducts = () => {
-    return products.map((product) => {
-      return (
-        <ProductCard
-          key={product.id}
-          id={product.id}
-          name={product.name}
-          brand={product.brand}
-          image={product.image}
-          price={product.price}
-        />
-      );
-    });
-  };
-
-  if (isLoadingAll) {
-    return <div>Loading...</div>;
-  }
+const ProductsPage: NextPage<{}> = () => {
+  const { productsCount } = useProductsStore();
 
   return (
-    <div id="productsPage">
-      <div className="flex border-b-2 px-4">
-        <ProductsFilters />
+    <div id="productsPage" className={classes.wrapper}>
+      <div className={classes.header}>
+        <h1 className={classes.title}>Products ({productsCount})</h1>
+
+        {/* TODO: <Sort /> */}
       </div>
 
-      <div className="p-4 grid grid-flow-row gap-x-4 gap-y-8 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:grid-cols-5">
-        { renderProducts() }
+      <div className={classes.content}>
+        <ProductsFilter />
+        <Products />
       </div>
     </div>
   );
 };
 
-export default Products;
+export default ProductsPage;

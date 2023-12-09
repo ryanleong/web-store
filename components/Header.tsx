@@ -8,7 +8,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = ({}) => {
   return (
-    <nav className="shadow-md">
+    <nav>
       <div className="h-16 container mx-auto px-4 flex items-center">
         <Link className="mr-8" href="/">
           <Image src={LOGO_URL} width={110} height={42} alt="SecretLab Logo" />
@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
 
         <Navigation />
 
-        <div className="ml-auto">
+        <div className="ml-6">
           <Link href="/cart">
             <span className="material-symbols-outlined">shopping_cart</span>
           </Link>
