@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import useApi from "@/api";
+import useApi from "@/api/useApi";
 import { useStore } from "@/store";
 import { Product } from "@/store/types";
 import { productResponseToProduct } from "@/utils/product";

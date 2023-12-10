@@ -2,7 +2,7 @@ import { StateCreator } from "zustand";
 
 import { FetchAllProductOptions, FilterSlice, ProductsSlice } from "./types";
 import { kebabToText } from "@/utils/string";
-import useApi from "@/api";
+import useApi from "@/api/useApi";
 import { getFilteredProducts, productResponseToProduct } from "@/utils/product";
 
 const defaultValues = {
@@ -22,6 +22,7 @@ const createProductsSlice: StateCreator<
   [],
   ProductsSlice
 > = (set, get) => {
+  // Disable ESLint as this edge case is in a Zustand store custom hook
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { fetchProducts, fetchCategories } = useApi();
 
@@ -35,7 +36,7 @@ const createProductsSlice: StateCreator<
 
     try {
       set(() => ({ isLoadingProducts: true }));
-      const { products, limit } = await fetchProducts({ category });
+      const { products } = await fetchProducts({ category });
       const formattedProducts = products.map(productResponseToProduct);
 
       set((state) => {
