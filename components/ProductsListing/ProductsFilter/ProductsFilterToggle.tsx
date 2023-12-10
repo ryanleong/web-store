@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { FilterType } from "@/store/types";
-import { ValueLabel } from "@/utils/types";
-import { useStore } from "@/store";
+import { FilterType } from '@/store/types';
+import { ValueLabel } from '@/utils/types';
+import { useStore } from '@/store';
 
 interface ProductsFilterToggleProps {
   filterType: FilterType;
@@ -10,11 +10,11 @@ interface ProductsFilterToggleProps {
 }
 
 const classes = {
-  wrapper: "border-b-2 mb-4 w-full",
-  title: "font-semibold mb-3.5 uppercase",
-  fieldSet: "flex flex-col mb-4",
-  inputWrapper: "cursor-pointer",
-  label: "capitalize",
+  wrapper: 'border-b-2 mb-4 w-full',
+  title: 'font-semibold mb-3.5 uppercase',
+  fieldSet: 'flex flex-col mb-4',
+  inputWrapper: 'cursor-pointer',
+  label: 'capitalize',
 };
 
 const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
@@ -24,7 +24,7 @@ const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
   const selectedValue = filterValues[filterType];
 
   const updateFilterValue = (value: string) => {
-    const updatedValue = selectedValue === value ? "" : value;
+    const updatedValue = selectedValue === value ? '' : value;
     setFilterValue(filterType, updatedValue);
   }
 
@@ -34,7 +34,7 @@ const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
         <div key={value} className={classes.inputWrapper}>
           <button
             className={`${classes.label} ${
-              selectedValue === value ? "text-red-800" : ""
+              selectedValue === value ? 'text-red-800' : ''
             }`}
             onClick={() => updateFilterValue(value)}
           >

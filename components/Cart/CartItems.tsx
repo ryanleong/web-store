@@ -1,13 +1,13 @@
-import React from "react";
-import { useStore } from "@/store";
-import CartItem from "./CartItem";
+import React from 'react';
+import { useStore } from '@/store';
+import CartItem from './CartItem';
 
 interface CartItemsProps {}
 
 const classes = {
-  wrapper: "w-full",
-  productCols: "hidden sm:flex justify-end gap-4",
-  productCol: "basis-28 grow-0 shrink-0 text-center",
+  wrapper: 'w-full',
+  productCols: 'hidden sm:flex justify-end gap-4',
+  productCol: 'basis-28 grow-0 shrink-0 text-center',
 };
 
 const CartItems: React.FC<CartItemsProps> = () => {

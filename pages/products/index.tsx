@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
-import React, { useEffect } from "react";
+import type { NextPage } from 'next';
+import React, { useEffect } from 'react';
 
-import { useStore } from "@/store";
-import ProductsFilter from "@/components/ProductsListing/ProductsFilter/ProductsFilter";
-import Products from "@/components/ProductsListing/Products/Products";
+import { useStore } from '@/store';
+import ProductsFilter from '@/components/ProductsListing/ProductsFilter/ProductsFilter';
+import Products from '@/components/ProductsListing/Products/Products';
 
 const classes = {
   wrapper: 'py-8',
@@ -17,7 +17,7 @@ const ProductsPage: NextPage<{}> = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   if (isLoadingCategories) {
     return <div>Loading...</div>;

@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
-import useApi from "@/api/useApi";
-import { useStore } from "@/store";
-import { Product } from "@/store/types";
-import { productResponseToProduct } from "@/utils/product";
-import ProductImage from "@/components/ProductDetails/ProductImage";
-import ProductContent from "@/components/ProductDetails/ProductContent";
+import useApi from '@/api/useApi';
+import { useStore } from '@/store';
+import { Product } from '@/store/types';
+import { productResponseToProduct } from '@/utils/product';
+import ProductImage from '@/components/ProductDetails/ProductImage';
+import ProductContent from '@/components/ProductDetails/ProductContent';
 
 const classes = {
-  wrapper: "container mx-auto px-4 py-8",
-  wrapperDesktop: "lg:gap-4 lg:flex",
-  imageContainer: "mb-6",
-  imageContainerDesktop: "md:basis-[500px] xl:basis-[700px] 2xl:basis-[900px] grow-0 shrink-0 lg:mb-0",
-  contentContainer: "px-4 w-full",
+  wrapper: 'container mx-auto px-4 py-8',
+  wrapperDesktop: 'lg:gap-4 lg:flex',
+  imageContainer: 'mb-6',
+  imageContainerDesktop: 'md:basis-[500px] xl:basis-[700px] 2xl:basis-[900px] grow-0 shrink-0 lg:mb-0',
+  contentContainer: 'px-4 w-full',
 };
 
 const Products: NextPage<{}> = () => {

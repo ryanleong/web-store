@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { ValueLabel } from "@/utils/types";
-import { FilterType } from "@/store/types";
-import { useStore } from "@/store";
+import { ValueLabel } from '@/utils/types';
+import { FilterType } from '@/store/types';
+import { useStore } from '@/store';
 
 export interface ProductsFilterCheckboxProps {
   filterType: FilterType;
@@ -10,11 +10,11 @@ export interface ProductsFilterCheckboxProps {
 }
 
 const classes = {
-  wrapper: "border-b-2 mb-4 w-full",
-  title: "font-semibold mb-3.5 uppercase",
-  fieldSet: "flex flex-col mb-4",
-  inputWrapper: "flex align-center cursor-pointer",
-  inputLabel: "capitalize ml-2",
+  wrapper: 'border-b-2 mb-4 w-full',
+  title: 'font-semibold mb-3.5 uppercase',
+  fieldSet: 'flex flex-col mb-4',
+  inputWrapper: 'flex align-center cursor-pointer',
+  inputLabel: 'capitalize ml-2',
 };
 
 const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (props) => {

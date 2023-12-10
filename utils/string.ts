@@ -5,9 +5,9 @@
  */
 const kebabToText = (str: string) => {
   return str
-    .split("-")
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 };
 
 /**
@@ -17,9 +17,9 @@ const kebabToText = (str: string) => {
  */
 const snakeToText = (str: string) => {
   return str
-    .split("_")
+    .split('_')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 }
 
 /**

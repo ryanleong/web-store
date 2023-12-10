@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface InputStepperProps {
   quantity: number;
@@ -7,10 +7,10 @@ interface InputStepperProps {
 }
 
 const classes = {
-  stepper: "border-2",
-  stepperDownButon: "px-3 border-r-2",
-  stepperUpButton: "px-3 border-l-2",
-  stepperUpValue: "px-0 w-8 text-center",
+  stepper: 'border-2',
+  stepperDownButon: 'px-3 border-r-2',
+  stepperUpButton: 'px-3 border-l-2',
+  stepperUpValue: 'px-0 w-8 text-center',
 };
 
 const InputStepper: React.FC<InputStepperProps> = (props) => {

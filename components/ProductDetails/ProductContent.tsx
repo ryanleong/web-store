@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Product } from "@/store/types";
-import { snakeToText } from "@/utils/string";
-import { calculateDiscountedPrice } from "@/utils/product";
-import ProductCta from "./ProductCta";
+import React, { useState } from 'react';
+import { Product } from '@/store/types';
+import { snakeToText } from '@/utils/string';
+import { calculateDiscountedPrice } from '@/utils/product';
+import ProductCta from './ProductCta';
+import Rating from '../Common/Rating';
 
 interface ProductContentProps {
   product: Product;
@@ -37,21 +38,12 @@ const ProductContent: React.FC<ProductContentProps> = (props) => {
     return (<span className={classes.pricePrimary}>${ price }</span>)
   }
 
-  const renderRating = () => {
-    const roundedRating = Math.ceil(rating);
-    const stars = Array(roundedRating).fill(0)
-
-    return stars.map((_, idx) => (
-      <span key={idx}>⭐</span>
-    ))
-  }
-
   return (
     <>
       <div className={classes.wrapper}>
         <h1 className={classes.title}>{name}</h1>
         <p className={classes.brand}>{ snakeToText(brand) }</p>
-        <p className={classes.rating}>{ renderRating() }</p>
+        <Rating rating={rating} styleOverride={classes.rating} />
 
         <p className={classes.priceWrapper}>
           { renderPrice() }

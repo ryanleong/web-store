@@ -1,10 +1,10 @@
-import CartItems from "@/components/Cart/CartItems";
-import CartSummary from "@/components/Cart/CartSummary";
-import type { NextPage } from "next";
-import React, { useEffect } from "react";
+import CartItems from '@/components/Cart/CartItems';
+import CartSummary from '@/components/Cart/CartSummary';
+import type { NextPage } from 'next';
+import React, { useEffect } from 'react';
 
 const classes = {
-  wrapper: "container mx-auto px-4 py-8",
+  wrapper: 'container mx-auto px-4 py-8',
   title: 'text-2xl mb-4',
   content: 'lg:flex gap-4',
   items: 'grow mb-6 lg:mb-0',

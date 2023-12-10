@@ -1,13 +1,13 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 import {
   FilterSlice,
   FilterType,
   IntialiseFilterValues,
   ProductsSlice,
   SetFilterValue,
-} from "./types";
-import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from "@/utils/constants";
-import { getFilteredProducts } from "@/utils/product";
+} from './types';
+import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from '@/utils/constants';
+import { getFilteredProducts } from '@/utils/product';
 
 const createFilterSlice: StateCreator<
   FilterSlice & ProductsSlice,
@@ -22,7 +22,7 @@ const createFilterSlice: StateCreator<
     set((state) => {
       const { products } = state;
       const filterValues = {
-        [FilterType.CATEGORY]: "",
+        [FilterType.CATEGORY]: '',
         [FilterType.RATING]: initialRatingValues,
         [FilterType.PRICE]: initialPriceValues,
       }
@@ -56,7 +56,7 @@ const createFilterSlice: StateCreator<
 
   return {
     filterValues: {
-      [FilterType.CATEGORY]: "",
+      [FilterType.CATEGORY]: '',
       [FilterType.RATING]: [],
       [FilterType.PRICE]: [],
     },

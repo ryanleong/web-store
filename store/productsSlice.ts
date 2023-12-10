@@ -1,9 +1,9 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 
-import { FetchAllProductOptions, FilterSlice, ProductsSlice } from "./types";
-import { kebabToText } from "@/utils/string";
-import useApi from "@/api/useApi";
-import { getFilteredProducts, productResponseToProduct } from "@/utils/product";
+import { FetchAllProductOptions, FilterSlice, ProductsSlice } from './types';
+import { kebabToText } from '@/utils/string';
+import useApi from '@/api/useApi';
+import { getFilteredProducts, productResponseToProduct } from '@/utils/product';
 
 const defaultValues = {
   products: [],
@@ -57,7 +57,7 @@ const createProductsSlice: StateCreator<
       // updateFilteredProducts();
       return formattedProducts;
     } catch (error) {
-      console.log("Error: ", error);
+      console.log('Error: ', error);
     }
   };
 
@@ -82,7 +82,7 @@ const createProductsSlice: StateCreator<
       }));
       return categories;
     } catch (error) {
-      console.log("Error: ", error);
+      console.log('Error: ', error);
     }
   };
 

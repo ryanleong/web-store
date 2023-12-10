@@ -1,17 +1,17 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 import {
   AddItemToCart,
   CartItem,
   CartSlice,
   RemoveItemFromCart,
   UpdateCartItemQuantity,
-} from "./types";
+} from './types';
 import {
   calculateTotalPriceOfCart,
   calculateTotalPriceOfItem,
-} from "@/utils/cart";
-import { fromLocalStorage, toLocalStorage } from "@/utils/local";
-import { CART_STORAGE_KEY } from "@/utils/constants";
+} from '@/utils/cart';
+import { fromLocalStorage, toLocalStorage } from '@/utils/local';
+import { CART_STORAGE_KEY } from '@/utils/constants';
 
 const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (
   set,

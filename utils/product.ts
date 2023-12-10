@@ -1,5 +1,5 @@
-import { FilterType, FilterValues, Product } from "@/store/types";
-import { PRODUCT_PRICE_RANGE } from "./constants";
+import { FilterType, FilterValues, Product } from '@/store/types';
+import { PRODUCT_PRICE_RANGE } from './constants';
 
 /**
  * Check if the rating is within the selected rating range
@@ -8,7 +8,7 @@ import { PRODUCT_PRICE_RANGE } from "./constants";
  * @returns
  */
 const isInRating = (filterValues: FilterValues, rating: number) => {
-  const roundedRating = Math.ceil(rating);
+  const roundedRating = Math.round(rating);
   return filterValues[FilterType.RATING].includes(`${roundedRating}`);
 };
 
@@ -57,7 +57,6 @@ const getFilteredProducts = (
  * @returns
  */
 const productResponseToProduct = (product: any): Product => {
-
   return {
     id: product.id,
     name: product.title,

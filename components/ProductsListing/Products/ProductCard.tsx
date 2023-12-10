@@ -1,7 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { calculateDiscountedPrice } from "@/utils/product";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { normalizePrice } from '@/utils/string';
+import Rating from '@/components/Common/Rating';
 
 interface ProductCardProps {
   id: number;
@@ -9,7 +10,8 @@ interface ProductCardProps {
   brand: string;
   price: number;
   image: string;
-  discountPercentage: number;
+  discountedPrice: number;
+  rating: number;
 }
 
 const classes = {
@@ -20,29 +22,31 @@ const classes = {
   price: 'flex align-middle',
   pricePrimary: 'text-md text-rose-800',
   priceSecondary: 'ml-2 text-md text-gray-700 line-through',
-}
+  rating: 'text-xs mb-1'
+};
 
 const ProductCard: React.FC<ProductCardProps> = (props) => {
-  const { id, name, brand, price, image, discountPercentage } = props;
+  const { id, name, brand, price, image, discountedPrice, rating } = props;
 
   const renderPrice = () => {
-    if (discountPercentage > 0) {
-      const discountdedPrice = calculateDiscountedPrice(price, discountPercentage);
-
+    if (discountedPrice > 0) {
       return (
         <p className={classes.price}>
-          <span className={`${classes.pricePrimary}`}>${discountdedPrice}</span>
+          <span className={`${classes.pricePrimary}`}>
+            ${normalizePrice(discountedPrice)}
+          </span>
           <span className={`${classes.priceSecondary}`}>${price}</span>
         </p>
-      )
+      );
     }
 
     return (
       <p className={classes.price}>
         <span className={`${classes.pricePrimary}`}>${price}</span>
       </p>
-    )
-  }
+    );
+  };
+
   return (
     <Link className={classes.wrapper} href={`/products/${id}`}>
       <div className={classes.image}>
@@ -57,7 +61,8 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
       <h3 className={classes.title}>{name}</h3>
       <span className={`${classes.brand}`}>{brand}</span>
-      { renderPrice() }
+      <Rating rating={rating} styleOverride={classes.rating} />
+      {renderPrice()}
     </Link>
   );
 };

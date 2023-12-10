@@ -1,11 +1,11 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 interface NavigationProps {}
 
 const classes = {
-  wrapper: "ml-auto",
-  content: "flex space-x-4",
+  wrapper: 'ml-auto',
+  content: 'flex space-x-4',
 };
 
 const Navigation: React.FC<NavigationProps> = ({}) => {

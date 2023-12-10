@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { normalizePrice } from "@/utils/string";
-import { useStore } from "@/store";
-import InputButton from "../Common/InputButton";
+import { normalizePrice } from '@/utils/string';
+import { useStore } from '@/store';
+import InputButton from '../Common/InputButton';
 
 interface CartSummaryProps {}
 
 const classes = {
-  wrapper: "w-full bg-neutral-200 px-4 py-6 rounded-lg",
+  wrapper: 'w-full bg-neutral-200 px-4 py-6 rounded-lg',
   title: 'text-2xl mb-8',
-  lineItem: "flex gap-3 justify-between mb-2 text-neutral-800",
+  lineItem: 'flex gap-3 justify-between mb-2 text-neutral-800',
   total: 'mt-6 py-2 flex justify-between text-lg border-y-2 border-neutral-500',
   totalPrice: 'text-red-700',
   cta: 'mt-6',

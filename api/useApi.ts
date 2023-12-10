@@ -1,4 +1,4 @@
-import { FetchProductsOptions, HookApi } from "./types";
+import { FetchProductsOptions, HookApi } from './types';
 
 const useApi = (): HookApi => {
   const fetchProducts = async (options: FetchProductsOptions) => {
@@ -17,7 +17,7 @@ const useApi = (): HookApi => {
   };
 
   const fetchCategories = async () => {
-    const res = await fetch(`/api/products/categories`);
+    const res = await fetch('/api/products/categories');
     const data = await res.json();
     return data;
   }

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { FilterType } from "@/store/types";
-import { useStore } from "@/store";
-import ProductCard from "./ProductCard";
+import { FilterType } from '@/store/types';
+import { useStore } from '@/store';
+import ProductCard from './ProductCard';
 
 interface ProductsProps {}
 
@@ -18,7 +18,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   useEffect(() => {
     fetchProducts({ category });
-  }, [category]);
+  }, [fetchProducts, category]);
 
   /**
    * Renders the products based on the filter values
@@ -34,7 +34,8 @@ const Products: React.FC<ProductsProps> = () => {
           brand={product.brand}
           image={product.image}
           price={product.price}
-          discountPercentage={product.discountPercentage}
+          discountedPrice={product.discountedPrice}
+          rating={product.rating}
         />
       );
     });

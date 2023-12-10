@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { MIN_PURCHASE_QUANTITY } from "@/utils/constants";
-import { useStore } from "@/store";
-import { Product } from "@/store/types";
-import InputStepper from "../Common/InputStepper";
-import InputButton from "../Common/InputButton";
+import React, { useState } from 'react';
+import { MIN_PURCHASE_QUANTITY } from '@/utils/constants';
+import { useStore } from '@/store';
+import { Product } from '@/store/types';
+import InputStepper from '../Common/InputStepper';
+import InputButton from '../Common/InputButton';
 
 interface ProductCtaProps {
   product: Product;
 }
 
 const classes = {
-  wrapper: "mt-10 lg:mt-20",
-  quantityWrapper: "flex mb-6",
-  quantity: "ml-auto",
-  labelQuanity: "text-xl font-semibold",
+  wrapper: 'mt-10 lg:mt-20',
+  quantityWrapper: 'flex mb-6',
+  quantity: 'ml-auto',
+  labelQuanity: 'text-xl font-semibold',
 };
 
 const ProductCta: React.FC<ProductCtaProps> = (props) => {

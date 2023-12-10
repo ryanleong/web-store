@@ -1,4 +1,4 @@
-import { CartItem } from "@/store/types";
+import { CartItem } from '@/store/types';
 
 /**
  * Calculate total price of cart

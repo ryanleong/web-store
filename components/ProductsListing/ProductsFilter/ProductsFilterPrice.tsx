@@ -1,8 +1,8 @@
-import React from "react";
-import { ProductPriceRange } from "@/utils/types";
+import React from 'react';
+import { ProductPriceRange } from '@/utils/types';
 import ProductsFilterCheckbox, {
   ProductsFilterCheckboxProps,
-} from "./ProductsFilterCheckbox";
+} from './ProductsFilterCheckbox';
 
 interface ProductsFilterPriceProps extends ProductsFilterCheckboxProps {
   items: Array<ProductPriceRange>;

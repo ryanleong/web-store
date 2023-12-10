@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface InputButtonProps {
   label: string;
@@ -7,7 +7,7 @@ interface InputButtonProps {
 }
 
 const classes = {
-  button: "w-full h-12 text-white bg-red-700 rounded-full",
+  button: 'w-full h-12 text-white bg-red-700 rounded-full',
 };
 
 const InputButton: React.FC<InputButtonProps> = (props) => {

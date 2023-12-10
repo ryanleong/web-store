@@ -1,12 +1,12 @@
-import { ValueLabel } from "@/utils/types";
+import { ValueLabel } from '@/utils/types';
 
 /**
  * Filter types
  */
 export enum FilterType {
-  CATEGORY = "category",
-  RATING = "rating",
-  PRICE = "price",
+  CATEGORY = 'category',
+  RATING = 'rating',
+  PRICE = 'price',
 }
 export interface FilterValues {
   [FilterType.CATEGORY]: string;
