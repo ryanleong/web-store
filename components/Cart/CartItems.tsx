@@ -6,7 +6,7 @@ interface CartItemsProps {}
 
 const classes = {
   wrapper: "w-full",
-  productCols: "basis-36 grow-0 shrink-0 flex justify-end gap-4 flex mb-3",
+  productCols: "hidden sm:flex justify-end gap-4",
   productCol: "basis-28 grow-0 shrink-0 text-center",
 };
 
@@ -24,9 +24,9 @@ const CartItems: React.FC<CartItemsProps> = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.productCols}>
-        <span className={classes.productCol}>Price</span>
+        {/* <span className={classes.productCol}>Price</span> */}
         <span className={classes.productCol}>Quantity</span>
-        <span className={classes.productCol}>Total</span>
+        <span className={classes.productCol}>Price</span>
       </div>
 
       {renderItems()}

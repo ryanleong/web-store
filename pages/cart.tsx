@@ -1,13 +1,14 @@
 import CartItems from "@/components/Cart/CartItems";
+import CartSummary from "@/components/Cart/CartSummary";
 import type { NextPage } from "next";
 import React, { useEffect } from "react";
 
 const classes = {
   wrapper: "container mx-auto px-4 py-8",
   title: 'text-2xl mb-4',
-  content: 'flex gap-4',
-  items: 'grow',
-  breakDown: '2xl:basis-[450px] grow-0 shrink-0',
+  content: 'lg:flex gap-4',
+  items: 'grow mb-6 lg:mb-0',
+  breakDown: 'lg:basis-[380px] xl:basis-[450px] grow-0 shrink-0',
 }
 
 const CartPage: NextPage<{}> = () => {
@@ -22,7 +23,7 @@ const CartPage: NextPage<{}> = () => {
         </div>
 
         <div className={classes.breakDown}>
-          Cost breakdown
+          <CartSummary />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { MIN_PURCHASE_QUANTITY } from "@/utils/constants";
 import { useStore } from "@/store";
 import { Product } from "@/store/types";
 import InputStepper from "../Common/InputStepper";
+import InputButton from "../Common/InputButton";
 
 interface ProductCtaProps {
   product: Product;
@@ -13,7 +14,6 @@ const classes = {
   quantityWrapper: "flex mb-6",
   quantity: "ml-auto",
   labelQuanity: "text-xl font-semibold",
-  ctaButton: "w-full h-12 bg-red-700 text-white rounded-full",
 };
 
 const ProductCta: React.FC<ProductCtaProps> = (props) => {
@@ -35,12 +35,10 @@ const ProductCta: React.FC<ProductCtaProps> = (props) => {
         </div>
       </div>
 
-      <button
+      <InputButton
+        label="Add to cart"
         onClick={() => addItemToCart(product, quantity)}
-        className={classes.ctaButton}
-      >
-        Add to cart
-      </button>
+      />
     </div>
   );
 };

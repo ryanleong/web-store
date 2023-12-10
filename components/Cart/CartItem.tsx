@@ -12,12 +12,14 @@ interface CartItemProps {
 }
 
 const classes = {
-  wrapper: "flex gap-6 border-b-2 py-4",
-  productImage: "h-36 basis-36 grow-0 shrink-0 relative",
-  details: "",
+  wrapper: "flex gap-4 border-b-2 py-4",
+  productImage: "h-20 sm:h-24 xl:h-36 basis-20 sm:basis-24 xl:basis-36 grow-0 shrink-0 relative",
+  contentWrapper: 'grow flex gap-4 flex-wrap sm:flex-nowrap',
+  details: "grow w-full",
   productName: "text-xl mb-1",
-  productCols: "basis-36 grow-0 shrink-0 flex justify-end gap-4 flex ml-auto",
-  productCol: "basis-28 grow-0 shrink-0 text-center text-lg",
+  productCol: "sm:basis-28 grow-0 shrink-0 text-center text-lg",
+  unitPrice: "text-neutral-700",
+  totalPrice: "ml-auto text-red-700",
   removeButton: "text-sm",
 };
 
@@ -31,7 +33,7 @@ const CartItem: React.FC<CartItemProps> = (props) => {
   const normalizedSubtotal = normalizePrice(subTotalPrice);
 
   const updateItemQuantity = (qty: number) => {
-    updateCartItemQuantity(id, qty)
+    updateCartItemQuantity(id, qty);
   };
 
   const onRemoveClick = () => {
@@ -50,13 +52,16 @@ const CartItem: React.FC<CartItemProps> = (props) => {
         />
       </div>
 
-      <div className={classes.details}>
-        <h3 className={classes.productName}>{name}</h3>
-        <span>{brand}</span>
-      </div>
+      <div className={classes.contentWrapper}>
+        <div className={classes.details}>
+          <h3 className={classes.productName}>{name}</h3>
+          <span>{brand}</span>
+        </div>
 
-      <div className={classes.productCols}>
-        <span className={classes.productCol}>${normalizedPrice}</span>
+        {/* <span className={`${classes.productCol} ${classes.unitPrice}`}>
+          ${normalizedPrice}
+        </span> */}
+
         <span className={classes.productCol}>
           <InputStepper
             quantity={quantity}
@@ -67,7 +72,9 @@ const CartItem: React.FC<CartItemProps> = (props) => {
             Remove
           </button>
         </span>
-        <span className={classes.productCol}>${normalizedSubtotal}</span>
+        <span className={`${classes.productCol} ${classes.totalPrice}`}>
+          ${normalizedSubtotal}
+        </span>
       </div>
     </div>
   );
