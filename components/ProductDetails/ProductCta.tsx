@@ -1,7 +1,8 @@
+import React, { useState } from "react";
+import { MIN_PURCHASE_QUANTITY } from "@/utils/constants";
 import { useStore } from "@/store";
 import { Product } from "@/store/types";
-import { MIN_PURCHASE_QUANTITY } from "@/utils/constants";
-import React, { useState } from "react";
+import InputStepper from "../Common/InputStepper";
 
 interface ProductCtaProps {
   product: Product;
@@ -9,13 +10,10 @@ interface ProductCtaProps {
 
 const classes = {
   wrapper: "mt-10 lg:mt-20",
-  quantityWrapper: "flex",
+  quantityWrapper: "flex mb-6",
+  quantity: "ml-auto",
   labelQuanity: "text-xl font-semibold",
-  stepper: "ml-auto mb-6 border-2",
-  stepperDownButon: "px-3 border-r-2",
-  stepperUpButton: "px-3 border-l-2",
-  stepperUpValue: "px-0 w-8 text-center",
-  ctaButton: "w-full h-12 bg-red-800 text-white rounded-full",
+  ctaButton: "w-full h-12 bg-red-700 text-white rounded-full",
 };
 
 const ProductCta: React.FC<ProductCtaProps> = (props) => {
@@ -23,40 +21,17 @@ const ProductCta: React.FC<ProductCtaProps> = (props) => {
   const { addItemToCart } = useStore();
   const [quantity, setQuantity] = useState(1);
 
-  const updateQuantity = (value: number) => {
-    const newQuantity = quantity + value;
-
-    if (newQuantity < MIN_PURCHASE_QUANTITY) {
-      setQuantity(MIN_PURCHASE_QUANTITY);
-    } else {
-      setQuantity(newQuantity);
-    }
-  };
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.quantityWrapper}>
         <h4 className={classes.labelQuanity}>Quantity</h4>
 
-        <div className={classes.stepper}>
-          <button
-            className={classes.stepperDownButon}
-            onClick={() => updateQuantity(-1)}
-          >
-            -
-          </button>
-          <input
-            type="number"
-            className={classes.stepperUpValue}
-            value={quantity}
-            disabled
+        <div className={classes.quantity}>
+          <InputStepper
+            quantity={quantity}
+            setQuantity={setQuantity}
+            minimumQuantity={MIN_PURCHASE_QUANTITY}
           />
-          <button
-            className={classes.stepperUpButton}
-            onClick={() => updateQuantity(1)}
-          >
-            +
-          </button>
         </div>
       </div>
 

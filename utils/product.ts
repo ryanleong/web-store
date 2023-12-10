@@ -56,19 +56,23 @@ const getFilteredProducts = (
  * @param product
  * @returns
  */
-const productResponseToProduct = (product: any): Product => ({
-  id: product.id,
-  name: product.title,
-  brand: product.brand,
-  price: product.price,
-  image: product.thumbnail,
-  images: product.images,
-  stock: product.stock,
-  category: product.category,
-  rating: product.rating,
-  description: product.description,
-  discountPercentage: product.discountPercentage,
-});
+const productResponseToProduct = (product: any): Product => {
+
+  return {
+    id: product.id,
+    name: product.title,
+    brand: product.brand,
+    price: product.price,
+    discountPercentage: product.discountPercentage,
+    discountedPrice: calculateDiscountedPrice(product.price, product.discountPercentage),
+    image: product.thumbnail,
+    images: product.images,
+    stock: product.stock,
+    category: product.category,
+    rating: product.rating,
+    description: product.description,
+  };
+};
 
 /**
  * Calculate discounted price
@@ -81,7 +85,7 @@ const calculateDiscountedPrice = (
   discountPercentage: number
 ) => {
   const discountdedPrice = price - (price * discountPercentage) / 100;
-  return Math.round((discountdedPrice + Number.EPSILON) * 100) / 100;
+  return discountdedPrice;
 };
 
 export {

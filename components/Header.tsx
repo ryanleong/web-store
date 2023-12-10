@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navigation from "./Navigation";
@@ -18,7 +18,8 @@ const classes = {
 };
 
 const Header: React.FC<HeaderProps> = () => {
-  const { getCartItemCount } = useStore();
+  const { initCart, getCartItemCount } = useStore();
+  useEffect(() => initCart(), []);
 
   return (
     <nav className={classes.wrapper}>

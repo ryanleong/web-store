@@ -22,7 +22,17 @@ const snakeToText = (str: string) => {
     .join(" ");
 }
 
+/**
+ * Normalize prices to 2 decimal places
+ * @param value
+ * @returns
+ */
+const normalizePrice = (value: number) => {
+  return Math.round((value + Number.EPSILON) * 100) / 100;
+}
+
 export {
   kebabToText,
   snakeToText,
+  normalizePrice,
 }

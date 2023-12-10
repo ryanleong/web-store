@@ -37,6 +37,7 @@ export type Product = {
   brand: string;
   price: number;
   discountPercentage: number;
+  discountedPrice: number;
   image: string;
   images: Array<string>;
   stock: number;
@@ -72,6 +73,7 @@ export type ProductsSlice = {
 export type CartItem = {
   product: Product;
   quantity: number;
+  subTotalPrice: number;
 }
 
 export type AddItemToCart = (product: Product, quantity?: number) => void;
@@ -80,9 +82,10 @@ export type UpdateCartItemQuantity = (productId: number, quantity: number) => vo
 
 export type CartSlice = {
   cartItems: Array<CartItem>;
+  totalPrice: number;
+  initCart: () => void;
   addItemToCart: AddItemToCart;
   removeItemFromCart: RemoveItemFromCart;
   updateCartItemQuantity: UpdateCartItemQuantity;
   getCartItemCount: () => number;
-
 };
