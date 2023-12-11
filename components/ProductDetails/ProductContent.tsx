@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Product } from '@/store/types';
-import { snakeToText } from '@/utils/string';
-import { calculateDiscountedPrice } from '@/utils/product';
+import { normalizePrice, snakeToText } from '@/utils/string';
 import ProductCta from './ProductCta';
 import Rating from '../Common/Rating';
 
@@ -21,41 +20,38 @@ const classes = {
 
 const ProductContent: React.FC<ProductContentProps> = (props) => {
   const { product } = props;
-  const { name, brand, price, discountPercentage, rating, description } = product;
+  const { name, brand, price, discountedPrice, rating, description } = product;
 
   const renderPrice = () => {
-    if (discountPercentage > 0) {
-      const discountdedPrice = calculateDiscountedPrice(price, discountPercentage);
-
+    if (discountedPrice > 0) {
       return (
         <>
-          <span className={classes.pricePrimary}>${ discountdedPrice }</span>
-          <span className={classes.priceSecondary}>${ price }</span>
+          <span className={classes.pricePrimary}>
+            ${normalizePrice(discountedPrice)}
+          </span>
+          <span className={classes.priceSecondary}>${price}</span>
         </>
-      )
+      );
     }
 
-    return (<span className={classes.pricePrimary}>${ price }</span>)
-  }
+    return <span className={classes.pricePrimary}>${price}</span>;
+  };
 
   return (
     <>
       <div className={classes.wrapper}>
         <h1 className={classes.title}>{name}</h1>
-        <p className={classes.brand}>{ snakeToText(brand) }</p>
+        <p className={classes.brand}>{snakeToText(brand)}</p>
         <Rating rating={rating} styleOverride={classes.rating} />
 
-        <p className={classes.priceWrapper}>
-          { renderPrice() }
-        </p>
-
+        <p className={classes.priceWrapper}>{renderPrice()}</p>
       </div>
 
       <p>{description}</p>
 
-      <ProductCta product={product}/>
+      <ProductCta product={product} />
     </>
-  )
+  );
 };
 
 export default ProductContent;

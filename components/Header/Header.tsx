@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Navigation from './Navigation';
 import { LOGO_URL } from '@/utils/constants';
 import { useStore } from '@/store';
+import CartWidget from './CartWidget';
 
 interface HeaderProps {}
 
@@ -12,14 +13,14 @@ const classes = {
     'sticky top-0 z-40 bg-white shadow-[0_3px_16px_-2px_rgba(0,0,0,0.3)]',
   content: 'h-16 container mx-auto px-4 flex items-center',
   logo: 'mr-8',
-  cart: 'ml-6 relative',
-  cartItemCount:
-    'absolute -top-2 -right-2 bg-red-600 rounded-full text-xs w-4 h-4 text-center text-white',
+  // cart: 'ml-6 relative',
+  // cartItemCount:
+  //   'absolute -top-2 -right-2 bg-red-600 rounded-full text-xs w-4 h-4 text-center text-white',
 };
 
 const Header: React.FC<HeaderProps> = () => {
-  const { initCart, getCartItemCount } = useStore();
-  useEffect(() => initCart(), [initCart]);
+  // const { initCart, getCartItemCount } = useStore();
+  // useEffect(() => initCart(), [initCart]);
 
   return (
     <nav className={classes.wrapper}>
@@ -29,8 +30,9 @@ const Header: React.FC<HeaderProps> = () => {
         </Link>
 
         <Navigation />
+        <CartWidget />
 
-        <div className={classes.cart}>
+        {/* <div className={classes.cart}>
           <Link href="/cart">
             <span className="material-symbols-outlined">shopping_cart</span>
 
@@ -40,7 +42,7 @@ const Header: React.FC<HeaderProps> = () => {
               </span>
             )}
           </Link>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

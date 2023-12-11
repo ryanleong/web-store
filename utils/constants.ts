@@ -2,6 +2,7 @@ export const API_URL = 'https://dummyjson.com';
 export const LOGO_URL = 'https://images.secretlab.co/theme/common/logo_secretlab_xmas.svg';
 export const FIXED_PRODUCT_IMAGE = 'https://images.secretlab.co/turntable/tr:n-w_450/R22PU-CP2077_02.jpg';
 export const CART_STORAGE_KEY = 'cartItems';
+export const CART_NOTIFICATION_DURATION = 3500;
 export const MAX_DETAILS_IMAGES = 4;
 export const MIN_PURCHASE_QUANTITY = 1;
 
