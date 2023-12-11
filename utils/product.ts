@@ -1,5 +1,5 @@
 import { FilterType, FilterValues, Product } from '@/store/types';
-import { PRODUCT_PRICE_RANGE } from './constants';
+import { PRODUCT_PRICE_RANGE } from '../config/constants';
 
 /**
  * Check if the rating is within the selected rating range
@@ -44,9 +44,10 @@ const getFilteredProducts = (
   filterValues: FilterValues
 ): Array<Product> => {
   return products.filter((product) => {
-    const { rating, price } = product;
+    const { rating, discountedPrice, price } = product;
     return (
-      isInRating(filterValues, rating) && isInPriceRange(filterValues, price)
+      isInRating(filterValues, rating) &&
+      isInPriceRange(filterValues, discountedPrice || price)
     );
   });
 };
@@ -63,7 +64,10 @@ const productResponseToProduct = (product: any): Product => {
     brand: product.brand,
     price: product.price,
     discountPercentage: product.discountPercentage,
-    discountedPrice: calculateDiscountedPrice(product.price, product.discountPercentage),
+    discountedPrice: calculateDiscountedPrice(
+      product.price,
+      product.discountPercentage
+    ),
     image: product.thumbnail,
     images: product.images,
     stock: product.stock,

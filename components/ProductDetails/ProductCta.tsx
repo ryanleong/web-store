@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MIN_PURCHASE_QUANTITY } from '@/utils/constants';
+import { MIN_PURCHASE_QUANTITY } from '@/config/constants';
 import { useStore } from '@/store';
 import { Product } from '@/store/types';
 import InputStepper from '../Common/InputStepper';

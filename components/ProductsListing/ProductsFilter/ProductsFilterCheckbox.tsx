@@ -17,21 +17,26 @@ const classes = {
   inputLabel: 'capitalize ml-2',
 };
 
-const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (props) => {
+const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (
+  props
+) => {
   const { filterValues, setFilterValue } = useStore();
   const { filterType, items = [] } = props;
   const selectedValue = filterValues[filterType] as Array<string>;
 
   const updatesSelectedValue = (value: string) => {
     if (selectedValue.includes(value)) {
-      setFilterValue(filterType, selectedValue.filter((item) => item !== value));
+      setFilterValue(
+        filterType,
+        selectedValue.filter((item) => item !== value)
+      );
     } else {
       setFilterValue(filterType, [...selectedValue, value]);
     }
-  }
+  };
 
   const renderItems = () => {
-    return items.map(({value, label}) => {
+    return items.map(({ value, label }) => {
       return (
         <div key={value} className={classes.inputWrapper}>
           <input
@@ -41,11 +46,9 @@ const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (props) =>
             value={value}
             checked={selectedValue.includes(`${value}`)}
             onChange={(e) => updatesSelectedValue(e.target.value)}
+            data-testid="checkbox"
           />
-          <label
-            htmlFor={`${value}`}
-            className={`${classes.inputLabel}`}
-          >
+          <label htmlFor={`${value}`} className={`${classes.inputLabel}`}>
             {label}
           </label>
         </div>
@@ -55,7 +58,9 @@ const ProductsFilterCheckbox: React.FC<ProductsFilterCheckboxProps> = (props) =>
 
   return (
     <div className={classes.wrapper}>
-      <h3 className={classes.title}>{filterType}</h3>
+      <h3 className={classes.title} data-testid="label">
+        {filterType}
+      </h3>
       <fieldset className={classes.fieldSet}>{renderItems()}</fieldset>
     </div>
   );

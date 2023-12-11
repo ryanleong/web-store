@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-import { MAX_DETAILS_IMAGES } from '@/utils/constants';
+import { MAX_DETAILS_IMAGES } from '@/config/constants';
 
 interface ProductImageProps {
   images: Array<string>;
+  altText: string;
 }
 
 const classes = {
@@ -16,7 +17,7 @@ const classes = {
 };
 
 const ProductImage: React.FC<ProductImageProps> = (props) => {
-  const { images } = props;
+  const { images, altText } = props;
   const [activeImage, setActiveImage] = useState(images[0]);
 
   const onThumbnailClick = (value: string) => {
@@ -52,7 +53,7 @@ const ProductImage: React.FC<ProductImageProps> = (props) => {
       <div className={`${classes.mainImage} ${classes.mainImageDesktop}`}>
         <Image
           src={activeImage}
-          alt="Product Name"
+          alt={altText}
           sizes="300px"
           fill
           style={{ objectFit: 'contain' }}

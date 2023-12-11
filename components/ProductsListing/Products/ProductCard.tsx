@@ -22,7 +22,7 @@ const classes = {
   price: 'flex align-middle',
   pricePrimary: 'text-md text-rose-800',
   priceSecondary: 'ml-2 text-md text-gray-700 line-through',
-  rating: 'text-xs mb-1'
+  rating: 'text-xs mb-1',
 };
 
 const ProductCard: React.FC<ProductCardProps> = (props) => {
@@ -32,10 +32,15 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
     if (discountedPrice > 0) {
       return (
         <p className={classes.price}>
-          <span className={`${classes.pricePrimary}`}>
+          <span
+            className={`${classes.pricePrimary}`}
+            data-testid="discounted-price"
+          >
             ${normalizePrice(discountedPrice)}
           </span>
-          <span className={`${classes.priceSecondary}`}>${price}</span>
+          <span className={`${classes.priceSecondary}`} data-testid="price">
+            ${price}
+          </span>
         </p>
       );
     }
@@ -59,8 +64,12 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
         />
       </div>
 
-      <h3 className={classes.title}>{name}</h3>
-      <span className={`${classes.brand}`}>{brand}</span>
+      <h3 className={classes.title} data-testid="name">
+        {name}
+      </h3>
+      <span className={`${classes.brand}`} data-testid="brand">
+        {brand}
+      </span>
       <Rating rating={rating} styleOverride={classes.rating} />
       {renderPrice()}
     </Link>

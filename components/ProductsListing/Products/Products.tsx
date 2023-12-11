@@ -43,7 +43,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   if (isLoadingProducts) {
     return (
-      <div className={classes.loaderWrapper}>
+      <div className={classes.loaderWrapper} data-testid='loader'>
         <h2>Loading...</h2>
       </div>
     )
@@ -51,7 +51,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   if (filteredProducts.length === 0) {
     return (
-      <div className={classes.loaderWrapper}>
+      <div className={classes.loaderWrapper} data-testid='empty'>
         <h2>No Products Found</h2>
       </div>
     )

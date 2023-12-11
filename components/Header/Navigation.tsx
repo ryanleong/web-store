@@ -12,8 +12,8 @@ const Navigation: React.FC<NavigationProps> = ({}) => {
   return (
     <div className={classes.wrapper}>
       <ul className={classes.content}>
-        <li>
-          <Link href="/products">Products</Link>
+        <li data-testid="products-link">
+          <Link href="/">Home</Link>
         </li>
       </ul>
     </div>

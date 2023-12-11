@@ -6,7 +6,7 @@ import {
   ProductsSlice,
   SetFilterValue,
 } from './types';
-import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from '@/utils/constants';
+import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from '@/config/constants';
 import { getFilteredProducts } from '@/utils/product';
 
 const createFilterSlice: StateCreator<
@@ -15,6 +15,9 @@ const createFilterSlice: StateCreator<
   [],
   FilterSlice
 > = (set) => {
+  /**
+   * Initialize filter values
+   */
   const intialiseFilterValues: IntialiseFilterValues = () => {
     const initialRatingValues = PRODUCT_RATINGS.map(({ value }) => value);
     const initialPriceValues = PRODUCT_PRICE_RANGE.map(({ value }) => value);
@@ -36,6 +39,11 @@ const createFilterSlice: StateCreator<
     });
   };
 
+  /**
+   * Set filter value
+   * @param filterType
+   * @param value
+   */
   const setFilterValue: SetFilterValue = (filterType, value) => {
     set((state) => {
       const { products } = state;

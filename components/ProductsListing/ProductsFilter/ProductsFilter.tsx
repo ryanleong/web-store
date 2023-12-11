@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { FilterType } from '@/store/types';
-import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from '@/utils/constants';
+import { PRODUCT_PRICE_RANGE, PRODUCT_RATINGS } from '@/config/constants';
 import { useStore } from '@/store';
 import ProductsFilterCheckbox from './ProductsFilterCheckbox';
 import ProductsFilterPrice from './ProductsFilterPrice';
@@ -13,8 +13,7 @@ const classes = {
   wrapper: 'md:basis-56 grow-0 shrink-0',
   content:
     'w-screen fixed left-0 z-20 px-4 py-6 bg-white transition-all h-screen flex flex-col',
-  contentDesktop:
-    'md:w-auto md:relative md:px-0 md:py-0 md:h-auto',
+  contentDesktop: 'md:w-auto md:relative md:px-0 md:py-0 md:h-auto',
   title: 'text-2xl mb-4',
   filterWrapper: 'overflow-y-auto sm:flex md:block',
   mobileButtons: 'flex gap-4 mt-auto pt-4 md:pt-0',
@@ -70,12 +69,17 @@ const ProductsFilter: React.FC<ProductsFilterProps> = () => {
         </div>
 
         <div className={classes.mobileButtons}>
-          <button className={classes.clearButton} onClick={reset}>
+          <button
+            className={classes.clearButton}
+            onClick={reset}
+            data-testid="reset-btn"
+          >
             Reset
           </button>
           <button
             className={classes.doneButton}
             onClick={() => setIsMobileFilterActive(false)}
+            data-testid="done-btn"
           >
             Done
           </button>
@@ -86,6 +90,7 @@ const ProductsFilter: React.FC<ProductsFilterProps> = () => {
         <button
           className={classes.mobileExpanderButton}
           onClick={() => setIsMobileFilterActive(!mobileFilterActive)}
+          data-testid="filter-btn"
         >
           Filter
         </button>

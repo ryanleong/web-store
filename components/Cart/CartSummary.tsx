@@ -24,7 +24,7 @@ const CartSummary: React.FC<CartSummaryProps> = () => {
 
   const onCheckoutClick = () => {
     // TODO: implement checkout
-  }
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -32,7 +32,7 @@ const CartSummary: React.FC<CartSummaryProps> = () => {
 
       <div className={classes.lineItem}>
         <span>Subtotal</span>
-        <span>${normalizedTotalPrice}</span>
+        <span data-testid="subtotalPrice">${normalizedTotalPrice}</span>
       </div>
 
       <div className={classes.lineItem}>
@@ -42,7 +42,9 @@ const CartSummary: React.FC<CartSummaryProps> = () => {
 
       <div className={classes.total}>
         <span>Total</span>
-        <span className={classes.totalPrice}>${total}</span>
+        <span className={classes.totalPrice} data-testid="totalPrice">
+          ${total}
+        </span>
       </div>
 
       <div className={classes.cta}>

@@ -37,6 +37,7 @@ const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
               selectedValue === value ? 'text-red-800' : ''
             }`}
             onClick={() => updateFilterValue(value)}
+            data-testid="button"
           >
             {label}
           </button>
@@ -47,7 +48,7 @@ const ProductsFilterToggle: React.FC<ProductsFilterToggleProps> = (props) => {
 
   return (
     <div className={classes.wrapper}>
-      <h3 className={classes.title}>{filterType}</h3>
+      <h3 className={classes.title} data-testid="title">{filterType}</h3>
       <fieldset className={classes.fieldSet}>{renderItems()}</fieldset>
     </div>
   );

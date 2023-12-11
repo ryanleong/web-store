@@ -11,7 +11,7 @@ import {
   calculateTotalPriceOfItem,
 } from '@/utils/cart';
 import { fromLocalStorage, toLocalStorage } from '@/utils/local';
-import { CART_STORAGE_KEY } from '@/utils/constants';
+import { CART_STORAGE_KEY } from '@/config/constants';
 
 const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (
   set,

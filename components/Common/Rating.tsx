@@ -15,7 +15,7 @@ const Rating: React.FC<RatingProps> = (props) => {
 
   return (
     <div className={styleOverride}>
-      { ratingArr.map((_, idx) => <span key={idx}>⭐</span>) }
+      { ratingArr.map((_, idx) => <span key={idx} data-testid="star">⭐</span>) }
     </div>
   );
 };

@@ -31,6 +31,7 @@ const InputStepper: React.FC<InputStepperProps> = (props) => {
       <button
         className={classes.stepperDownButon}
         onClick={() => updateQuantity(-1)}
+        data-testid="decrement"
       >
         -
       </button>
@@ -43,6 +44,7 @@ const InputStepper: React.FC<InputStepperProps> = (props) => {
       <button
         className={classes.stepperUpButton}
         onClick={() => updateQuantity(1)}
+        data-testid="increment"
       >
         +
       </button>

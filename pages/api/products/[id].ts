@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { API_URL } from '@/utils/constants';
 
 type ResponseData = {
   message: string;
@@ -13,7 +12,7 @@ const handler = async (
 
   if (req.method === 'GET' && id) {
     try {
-      const response = await fetch(`${API_URL}/products/${id}`);
+      const response = await fetch(`${process.env.API_URL}/products/${id}`);
       if (!response.ok) {
         throw new Error(`${response.statusText}`, { cause: response });
       }

@@ -1,7 +1,7 @@
 import CartItems from '@/components/Cart/CartItems';
 import CartSummary from '@/components/Cart/CartSummary';
 import type { NextPage } from 'next';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const classes = {
   wrapper: 'container mx-auto px-4 py-8',
@@ -15,7 +15,7 @@ const CartPage: NextPage<{}> = () => {
 
   return (
     <div id="cartPage" className={classes.wrapper}>
-      <h1 className={classes.title}>Shopping Cart</h1>
+      <h1 className={classes.title} data-testid="title">Shopping Cart</h1>
 
       <div className={classes.content}>
         <div className={classes.items}>

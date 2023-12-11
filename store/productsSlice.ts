@@ -28,7 +28,6 @@ const createProductsSlice: StateCreator<
 
   /**
    * Fetch list of products from API
-   * @param isProxyCall boolean To indicate if its a call from another action
    * @returns void
    */
   const fetchAllProducts = async (options: FetchAllProductOptions) => {
@@ -63,7 +62,6 @@ const createProductsSlice: StateCreator<
 
   /**
    * Fetch list of categories from API
-   * @param isProxyCall boolean To indicate if its a call from another action
    * @returns void
    */
   const fetchAllCategories = async () => {

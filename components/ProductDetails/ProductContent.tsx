@@ -26,15 +26,15 @@ const ProductContent: React.FC<ProductContentProps> = (props) => {
     if (discountedPrice > 0) {
       return (
         <>
-          <span className={classes.pricePrimary}>
+          <span className={classes.pricePrimary} data-testid='discountedPrice'>
             ${normalizePrice(discountedPrice)}
           </span>
-          <span className={classes.priceSecondary}>${price}</span>
+          <span className={classes.priceSecondary} data-testid='priceWDiscount'>${price}</span>
         </>
       );
     }
 
-    return <span className={classes.pricePrimary}>${price}</span>;
+    return <span className={classes.pricePrimary} data-testid='price'>${price}</span>;
   };
 
   return (

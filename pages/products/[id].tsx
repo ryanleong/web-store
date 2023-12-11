@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
-import useApi from '@/api/useApi';
 import { useStore } from '@/store';
+import useApi from '@/api/useApi';
 import { Product } from '@/store/types';
 import { productResponseToProduct } from '@/utils/product';
 import ProductImage from '@/components/ProductDetails/ProductImage';
@@ -17,7 +17,7 @@ const classes = {
   contentContainer: 'px-4 w-full',
 };
 
-const Products: NextPage<{}> = () => {
+const ProductDetails: NextPage<{}> = () => {
   const { query } = useRouter();
   const productId = query?.id;
   const { getProductById } = useStore();
@@ -39,14 +39,14 @@ const Products: NextPage<{}> = () => {
     setProduct(product);
   };
 
-  if (!product) return <div>Loading...</div>;
+  if (!product) return <div data-testid="loading">Loading...</div>;
 
   return (
     <div className={`${classes.wrapper} ${classes.wrapperDesktop}`}>
       <div
         className={`${classes.imageContainer} ${classes.imageContainerDesktop}`}
       >
-        <ProductImage images={product.images} />
+        <ProductImage images={product.images} altText={product.name} />
       </div>
       <div className={classes.contentContainer}>
         <ProductContent product={product} />
@@ -55,4 +55,4 @@ const Products: NextPage<{}> = () => {
   );
 };
 
-export default Products;
+export default ProductDetails;
