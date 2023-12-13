@@ -44,7 +44,12 @@ const createFilterSlice: StateCreator<
    * @param filterType
    * @param value
    */
-  const setFilterValue: SetFilterValue = (filterType, value) => {
+  const setFilterValue: SetFilterValue = async (filterType, value) => {
+    // This await is to simulate the loading animation since there's no API call
+    // In real world, this action would be making an API call and won't need to
+    // simulate the loading
+    await set((state) => ({ ...state, isLoadingProducts: true }));
+
     set((state) => {
       const { products } = state;
       const filterValues = {
@@ -58,6 +63,7 @@ const createFilterSlice: StateCreator<
         filterValues,
         filteredProducts,
         productsCount: filteredProducts.length,
+        isLoadingProducts: false,
       };
     });
   };

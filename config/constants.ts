@@ -3,6 +3,7 @@ export const CART_STORAGE_KEY = 'cartItems';
 export const CART_NOTIFICATION_DURATION = 3500;
 export const MAX_DETAILS_IMAGES = 4;
 export const MIN_PURCHASE_QUANTITY = 1;
+export const LOADER_DURATION = 500;
 
 export const PRODUCT_RATINGS = [
   {

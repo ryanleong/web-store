@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 import { FilterType } from '@/store/types';
 import { useStore } from '@/store';
@@ -61,11 +62,17 @@ const Products: React.FC<ProductsProps> = () => {
       {filteredProducts.length === 0 ? (
         renderNoProducts()
       ) : (
-        <div
+        <motion.main
           className={`${classes.productsWrapper} ${classes.productsWrapperDesktop}`}
+          initial="initial"
+          animate="animate"
+          variants={{
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+          }}
         >
           {renderProducts()}
-        </div>
+        </motion.main>
       )}
     </Loader>
   );

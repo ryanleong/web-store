@@ -54,12 +54,13 @@ describe('filterSlice', () => {
     };
     const store = filterSlice(set);
 
-    it('should set filter value', () => {
-      store.setFilterValue(FilterType.RATING, ['3']);
+    it('should set filter value', async () => {
+      await store.setFilterValue(FilterType.RATING, ['3']);
 
       expect(mockState).toEqual({
         filteredProducts: [mockProduct],
         productsCount: 1,
+        isLoadingProducts: false,
         filterValues: {
           ...mockState.filterValues,
           [FilterType.RATING]: ['3'],

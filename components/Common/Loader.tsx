@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import { LOADER_DURATION } from '@/config/constants';
+
 interface LoaderProps {
   children: React.ReactNode;
   containerClasses?: string;
@@ -14,6 +16,13 @@ const spinTransition = {
   duration: 1,
 };
 
+const classes = {
+  wrapper: 'w-full',
+  animationWrapper: 'w-full flex justify-center mt-40',
+  animationContainer: 'relative h-16 w-16',
+  animationElement: 'block h-12 w-12 border-t-4 border-gray-900 rounded-full top-0 left-0',
+}
+
 const Loader: React.FC<LoaderProps> = (props) => {
   const {
     children,
@@ -26,19 +35,19 @@ const Loader: React.FC<LoaderProps> = (props) => {
   useEffect(() => {
     if (isLoading) {
       setShowLoader(true);
-      setTimeout(() => setShowLoader(false), 1000);
+      setTimeout(() => setShowLoader(false), LOADER_DURATION);
     }
   }, [isLoading]);
 
   const renderLoadingAnimation = () => {
     return (
       <div
-        className={`w-full flex justify-center mt-40 ${loaderClasses}`}
+        className={`${classes.animationWrapper} ${loaderClasses}`}
         data-testid="loader"
       >
-        <div className="relative h-16 w-16">
+        <div className={classes.animationContainer}>
           <motion.span
-            className="block h-12 w-12 border-t-4 border-gray-900 rounded-full top-0 left-0"
+            className={classes.animationElement}
             animate={{ rotate: 360 }}
             transition={spinTransition}
           />
@@ -48,7 +57,7 @@ const Loader: React.FC<LoaderProps> = (props) => {
   };
 
   return (
-    <div className={`w-full ${containerClasses}`}>
+    <div className={`${classes.wrapper} ${containerClasses}`}>
       {isLoading || showLoader ? renderLoadingAnimation() : children}
     </div>
   );

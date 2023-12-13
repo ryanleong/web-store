@@ -21,10 +21,12 @@ const handler = async (
 
       const data = await response.json();
       res.status(response.status).json(data);
+      return;
     } catch (error: any) {
       const { cause } = error || {};
       const { status, statusText } = cause || {};
       res.status(status).json({ message: statusText });
+      return;
     }
   }
 

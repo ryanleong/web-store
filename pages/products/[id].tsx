@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 
 import { useStore } from '@/store';
 import useApi from '@/api/useApi';
@@ -59,7 +60,15 @@ const ProductDetails: NextPage<{}> = () => {
   return (
     <Loader isLoading={isLoading}>
       {product?.id ? (
-        <div className={`${classes.wrapper} ${classes.wrapperDesktop}`}>
+        <motion.main
+          className={`${classes.wrapper} ${classes.wrapperDesktop}`}
+          initial="initial"
+          animate="animate"
+          variants={{
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+          }}
+        >
           <div
             className={`${classes.imageContainer} ${classes.imageContainerDesktop}`}
           >
@@ -68,7 +77,7 @@ const ProductDetails: NextPage<{}> = () => {
           <div className={classes.contentContainer}>
             <ProductContent product={product} />
           </div>
-        </div>
+        </motion.main>
       ) : (
         renderNoProduct()
       )}
