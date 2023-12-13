@@ -3,18 +3,18 @@ import cartSlice from '../cartSlice';
 import { fromLocalStorage, toLocalStorage } from '@/utils/local';
 import { mockCart, mockProduct2 } from '../../config/tests/mocks';
 
-jest.mock('@/utils/local')
+jest.mock('@/utils/local');
 
 describe('cartSlice', () => {
   describe('#initCart', () => {
     let mockState = {
       totalPrice: 0,
-      cartItems: []
-    }
+      cartItems: [],
+    };
     const localStorageCart = {
       totalPrice: 200,
-      cartItems: mockCart
-    }
+      cartItems: mockCart,
+    };
 
     fromLocalStorage.mockReturnValue(localStorageCart);
     const set = jest.fn((updateState) => {
@@ -36,14 +36,15 @@ describe('cartSlice', () => {
       expect(fromLocalStorage).toHaveBeenCalledWith(CART_STORAGE_KEY);
       expect(mockState.totalPrice).toBe(200);
       expect(mockState.cartItems).toBe(mockCart);
-    })
+    });
   });
 
   describe('#addItemToCart', () => {
     let mockState = {
       totalPrice: 1,
-      cartItems: [mockCart[0]]
-    }
+      cartItems: [mockCart[0]],
+      pushNotification: jest.fn(),
+    };
 
     const set = (updateStateFn) => {
       mockState = updateStateFn(mockState);
@@ -54,7 +55,8 @@ describe('cartSlice', () => {
       store.addItemToCart(mockProduct2, 3);
       expect(mockState.totalPrice).toBe(170);
       expect(mockState.cartItems).toStrictEqual(mockCart);
-    })
+      expect(mockState.pushNotification).toHaveBeenCalled();
+    });
 
     it('should update an existing item in cart', () => {
       toLocalStorage.mockReturnValue(true);
@@ -69,15 +71,16 @@ describe('cartSlice', () => {
           product: mockProduct2,
           quantity: 4,
           subTotalPrice: 92,
-        }
+        },
       ]);
-    })
+      expect(mockState.pushNotification).toHaveBeenCalled();
+    });
   });
 
   describe('#removeItemFromCart', () => {
     let mockState = {
       totalPrice: 1,
-      cartItems: mockCart
+      cartItems: mockCart,
     };
 
     const set = (updateStateFn) => {
@@ -92,13 +95,13 @@ describe('cartSlice', () => {
       expect(toLocalStorage).toHaveBeenCalled();
       expect(mockState.totalPrice).toBe(69);
       expect(mockState.cartItems).toStrictEqual([mockCart[1]]);
-    })
+    });
   });
 
   describe('#updateCartItemQuantity', () => {
     let mockState = {
       totalPrice: 339,
-      cartItems: mockCart
+      cartItems: mockCart,
     };
 
     const set = (updateStateFn) => {
@@ -114,7 +117,7 @@ describe('cartSlice', () => {
       expect(mockState.totalPrice).toBe(147);
       expect(mockState.cartItems).toStrictEqual([
         mockCart[0],
-        { product: mockProduct2, quantity: 2, subTotalPrice: 46 }
+        { product: mockProduct2, quantity: 2, subTotalPrice: 46 },
       ]);
     });
 
@@ -131,7 +134,7 @@ describe('cartSlice', () => {
   describe('#getCartItemCount', () => {
     let mockState = {
       totalPrice: 339,
-      cartItems: mockCart
+      cartItems: mockCart,
     };
 
     const get = () => mockState;

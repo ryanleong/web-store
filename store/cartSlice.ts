@@ -3,6 +3,8 @@ import {
   AddItemToCart,
   CartItem,
   CartSlice,
+  NotificationType,
+  NotificationSlice,
   RemoveItemFromCart,
   UpdateCartItemQuantity,
 } from './types';
@@ -13,10 +15,12 @@ import {
 import { fromLocalStorage, toLocalStorage } from '@/utils/local';
 import { CART_STORAGE_KEY } from '@/config/constants';
 
-const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (
-  set,
-  get
-) => {
+const createCartSlice: StateCreator<
+  CartSlice & NotificationSlice,
+  [],
+  [],
+  CartSlice
+> = (set, get) => {
   /**
    * Initialize cart from local storage
    */
@@ -40,7 +44,7 @@ const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (
     // as the mock API does not persist the data
 
     set((state) => {
-      const { cartItems } = state;
+      const { cartItems, pushNotification } = state;
       let updatedCartItems = cartItems;
 
       // check if item already exists in cart
@@ -63,6 +67,12 @@ const createCartSlice: StateCreator<CartSlice, [], [], CartSlice> = (
         const finalItem = calculateTotalPriceOfItem(newItem);
         updatedCartItems = [...cartItems, finalItem];
       }
+
+      // Push a notification
+      pushNotification({
+        type: NotificationType.ADD_TO_CART,
+        message: 'Your item has been added to cart',
+      });
 
       const totalPrice = calculateTotalPriceOfCart(updatedCartItems);
       const finalCart = { totalPrice, cartItems: updatedCartItems };

@@ -23,6 +23,11 @@ jest.mock('../CartWidget', () => {
   return Child;
 });
 
+jest.mock('../Notification', () => {
+  const Child = () => <div>Notification</div>;
+  return Child;
+});
+
 describe('Header', () => {
   it('renders logo', () => {
     render(<Header />);
@@ -35,5 +40,6 @@ describe('Header', () => {
     render(<Header />);
     expect(screen.getByText('Navigation')).toBeInTheDocument();
     expect(screen.getByText('CartWidget')).toBeInTheDocument();
+    expect(screen.getByText('Notification')).toBeInTheDocument();
   });
 });

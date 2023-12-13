@@ -89,3 +89,24 @@ export type CartSlice = {
   updateCartItemQuantity: UpdateCartItemQuantity;
   getCartItemCount: () => number;
 };
+
+/**
+ * Notification Types
+ */
+export enum NotificationType {
+  ADD_TO_CART = 'add_to_cart',
+}
+
+export type Notification = {
+  message: string;
+  type: NotificationType;
+};
+
+export type PushNotification = (notification: Notification) => void;
+export type ShiftNotification = () => void;
+
+export type NotificationSlice = {
+  notifications: Array<Notification>;
+  pushNotification: PushNotification;
+  shiftNotification: ShiftNotification;
+};
