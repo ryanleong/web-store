@@ -29,7 +29,7 @@ describe('api/products/index', () => {
 
     await productsApi(req, res);
 
-    expect(global.fetch).toHaveBeenCalledWith(`${process.env.API_URL}/products`);
+    expect(global.fetch).toHaveBeenCalledWith(`${process.env.NEXT_PUBLIC_API_URL}/products`);
     expect(status).toHaveBeenCalledWith(200);
     expect(json).toHaveBeenCalledWith([{'something': 123}]);
   });

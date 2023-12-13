@@ -37,7 +37,7 @@ const CartSummary: React.FC<CartSummaryProps> = () => {
 
       <div className={classes.lineItem}>
         <span>Estimated Delivery & Handling</span>
-        <span>$0.00</span>
+        <span>$0</span>
       </div>
 
       <div className={classes.total}>

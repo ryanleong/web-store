@@ -9,13 +9,14 @@ const classes = {
   content: 'lg:flex gap-4',
   items: 'grow mb-6 lg:mb-0',
   breakDown: 'lg:basis-[380px] xl:basis-[450px] grow-0 shrink-0',
-}
+};
 
 const CartPage: NextPage<{}> = () => {
-
   return (
     <div id="cartPage" className={classes.wrapper}>
-      <h1 className={classes.title} data-testid="title">Shopping Cart</h1>
+      <h1 className={classes.title} data-testid="title">
+        Shopping Cart
+      </h1>
 
       <div className={classes.content}>
         <div className={classes.items}>

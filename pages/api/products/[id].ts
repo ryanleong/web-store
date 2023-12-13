@@ -12,7 +12,7 @@ const handler = async (
 
   if (req.method === 'GET' && id) {
     try {
-      const response = await fetch(`${process.env.API_URL}/products/${id}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`);
       if (!response.ok) {
         throw new Error(`${response.statusText}`, { cause: response });
       }
