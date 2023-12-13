@@ -1,40 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Demo: https://web-store-ryanleong.vercel.app/
 
-## Getting Started
+# Running in development
+`Node >20.7` is required to run.
 
-First, run the development server:
-
-```bash
+```
+npm install
+cp .env.sample .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Current setup
+- **Zustand** was used for state management and is broken down into slices
+  - This neatens the store, allowing better maintanability
+  - See `/store`
+- A **notification system** was also added to the app
+  - Currently, the only notification is when the user adds an item to cart but it could be extended further in the future
+  - See `/store/noficationSlice.ts` and `/components/Header/Notification.tsx`
+- The app is fully type checked using **Typescript**
+- Components were split into separate directories based on the feature they are part of
+  - There is also a `common` directory for reusable components
+  - See `/components`
+- An API hook was set up for making API calls
+  - This separates this from the app (better modularity)
+- Unit test were done using Jest and React Testing Library
+  - Test were kept in each component/file directory
+    - This keep the test close to the file, making it easier to refactor as the app grows
+    - See `/__tests__` in each respective directory
+  - The only exception is unit test for `/page` as NextJS try to parse it as a page route
+    - See `/__tests__` in the root directory
+    - This is documented in NextJS docs
+- In the interest of time, TailwindCSS was used for styling.
+- **Framer motion** was also used for page and component transitions
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+# Design
+- The design takes inspiration from the Nike website and Secretlab
+  - This provided a good starting point for a good UX experience for the end user
+- Images provided by Dummyjson aren't the best, which brings the design down
+  - In a real world scenario, images should be optimised for the site
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# Limitations
+- Dummyjson had an api endpoint for Cart CRUD, but it does not persist the data
+  - So cart data is currently saved to localStorage for demo purposes
+- Dummyjson only had an endpoint to filter by category, and I used it.
+  - However, there isn't one for rating and price range. So currently the sorting logic is on the client side
+  - Ideally, this should be done on the API, along with sorting
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Things I would like to upgrade given more time
+- Sever-side rendering (SSR) / Incremental Static Regeneration (ISR)
+  - This would allow SEO crawlers to have better access to the site
+  - Allowing it to be crawled more efficiently
+- Routes to persist product filtering
+  - ie. `/products/category/${category_slug}?rating=4`
+  - This will allow users to persist their current filtering
