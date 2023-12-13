@@ -33,6 +33,7 @@ const createFilterSlice: StateCreator<
 
       return {
         filterValues,
+        hasBeenInitialized: true,
         filteredProducts,
         productsCount: filteredProducts.length,
       }
@@ -74,6 +75,7 @@ const createFilterSlice: StateCreator<
       [FilterType.RATING]: [],
       [FilterType.PRICE]: [],
     },
+    hasBeenInitialized: false,
 
     intialiseFilterValues,
     setFilterValue,

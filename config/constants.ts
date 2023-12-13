@@ -1,3 +1,5 @@
+import { FilterType } from '@/store/types';
+
 export const LOGO_URL = 'https://images.secretlab.co/theme/common/logo_secretlab_xmas.svg';
 export const CART_STORAGE_KEY = 'cartItems';
 export const CART_NOTIFICATION_DURATION = 3500;
@@ -66,3 +68,9 @@ export const PRODUCT_PRICE_RANGE = [
     max: -1,
   },
 ]
+
+export const DEFAULT_FILTER_VALUES = {
+  [FilterType.CATEGORY]: '',
+  [FilterType.RATING]: PRODUCT_RATINGS.map(({ value }) => value),
+  [FilterType.PRICE]: PRODUCT_PRICE_RANGE.map(({ value }) => value),
+}

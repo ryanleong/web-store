@@ -23,6 +23,7 @@ describe('filterSlice', () => {
       expect(mockState).toEqual({
         filteredProducts: [mockProduct],
         productsCount: 1,
+        hasBeenInitialized: true,
         filterValues: {
           category: '',
           price: ['0-100', '101-200', '201-300', '301-400', '401-500', '>500'],

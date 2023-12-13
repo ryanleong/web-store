@@ -21,13 +21,15 @@ describe('ProductsFilter', () => {
   const mockUseStore = {
     categories: ['category1', 'category2'],
     intialiseFilterValues: jest.fn(),
+    hasBeenInitialized: false,
   };
 
-  beforeEach(() => {
-    useStore.mockReturnValue(mockUseStore);
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('renders without crashing', () => {
+    useStore.mockReturnValue(mockUseStore);
     const { getByTestId } = render(<ProductsFilter />);
     expect(getByTestId('reset-btn')).toBeInTheDocument();
     expect(getByTestId('done-btn')).toBeInTheDocument();
@@ -38,11 +40,22 @@ describe('ProductsFilter', () => {
   });
 
   it('should initialise filter values on mount', () => {
+    useStore.mockReturnValue(mockUseStore);
     render(<ProductsFilter />);
     expect(mockUseStore.intialiseFilterValues).toHaveBeenCalled();
   });
 
+  it('should not initialise filter values if already initialized', () => {
+    useStore.mockReturnValue({
+      ...mockUseStore,
+    hasBeenInitialized: true,
+  });
+    render(<ProductsFilter />);
+    expect(mockUseStore.intialiseFilterValues).not.toHaveBeenCalled();
+  });
+
   it('calls initialiseFilterValues when Reset button is clicked', () => {
+    useStore.mockReturnValue(mockUseStore);
     const { getByTestId } = render(<ProductsFilter />);
     fireEvent.click(getByTestId('reset-btn'));
     expect(mockUseStore.intialiseFilterValues).toHaveBeenCalled();

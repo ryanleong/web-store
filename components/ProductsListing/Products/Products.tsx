@@ -9,7 +9,7 @@ import Loader from '@/components/Common/Loader';
 interface ProductsProps {}
 
 const classes = {
-  productsWrapper: 'px-0 grid grid-flow-row gap-x-4 gap-y-8 grid-cols-2',
+  productsWrapper: 'grid grid-flow-row gap-x-4 gap-y-8 grid-cols-2',
   productsWrapperDesktop:
     'md:px-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
   noDataWrapper: 'w-full flex justify-center mt-40',

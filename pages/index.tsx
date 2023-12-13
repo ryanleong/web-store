@@ -14,11 +14,11 @@ const classes = {
 }
 
 const HomePage: NextPage<{}> = () => {
-  const { productsCount, fetchCategories, isLoadingCategories } = useStore();
+  const { productsCount, fetchCategories, categories, isLoadingCategories } = useStore();
 
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    if (categories.length < 1) fetchCategories()
+  }, [fetchCategories, categories]);
 
   if (isLoadingCategories) return null
 

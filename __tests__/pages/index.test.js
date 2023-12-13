@@ -17,14 +17,16 @@ describe('HomePage', () => {
   const mockUseStore = {
     productsCount: 10,
     fetchCategories: jest.fn(),
+    categories: [],
     isLoadingCategories: false,
   };
 
-  beforeEach(() => {
-    useStore.mockReturnValue(mockUseStore);
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render correctly', () => {
+    useStore.mockReturnValue(mockUseStore);
     const { getByTestId } = render(<HomePage />);
     expect(getByTestId('title').textContent).toBe('Products (10)');
     expect(getByTestId('product-filter')).toBeInTheDocument();
@@ -32,7 +34,17 @@ describe('HomePage', () => {
   });
 
   it('should call fetchCategories on mount', () => {
+    useStore.mockReturnValue(mockUseStore);
     render(<HomePage />);
     expect(mockUseStore.fetchCategories).toHaveBeenCalled();
+  });
+
+  it('should not call fetchCategories if already initialized', () => {
+    useStore.mockReturnValue({
+      ...mockUseStore,
+      categories: [{}],
+    });
+    render(<HomePage />);
+    expect(mockUseStore.fetchCategories).not.toHaveBeenCalled();
   });
 });

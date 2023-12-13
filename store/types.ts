@@ -22,7 +22,7 @@ export type SetFilterValue = (
 ) => void;
 export interface FilterSlice {
   filterValues: FilterValues;
-
+  hasBeenInitialized: boolean;
   intialiseFilterValues: IntialiseFilterValues;
   setFilterValue: SetFilterValue;
 }

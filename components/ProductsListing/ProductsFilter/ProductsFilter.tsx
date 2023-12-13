@@ -27,14 +27,14 @@ const classes = {
 };
 
 const ProductsFilter: React.FC<ProductsFilterProps> = () => {
-  const { categories, intialiseFilterValues } = useStore();
+  const { categories, intialiseFilterValues, hasBeenInitialized } = useStore();
   const [mobileFilterActive, setIsMobileFilterActive] = useState(false);
 
   useEffect(() => {
-    if (categories.length > 1) {
+    if (!hasBeenInitialized && categories.length > 1) {
       intialiseFilterValues();
     }
-  }, [categories, intialiseFilterValues]);
+  }, [hasBeenInitialized, categories, intialiseFilterValues]);
 
   const reset = () => {
     intialiseFilterValues();
