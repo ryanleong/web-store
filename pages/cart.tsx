@@ -1,7 +1,9 @@
-import CartItems from '@/components/Cart/CartItems';
-import CartSummary from '@/components/Cart/CartSummary';
 import type { NextPage } from 'next';
 import React from 'react';
+import Head from 'next/head';
+
+import CartItems from '@/components/Cart/CartItems';
+import CartSummary from '@/components/Cart/CartSummary';
 
 const classes = {
   wrapper: 'container mx-auto px-4 py-8',
@@ -13,21 +15,27 @@ const classes = {
 
 const CartPage: NextPage<{}> = () => {
   return (
-    <div id="cartPage" className={classes.wrapper}>
-      <h1 className={classes.title} data-testid="title">
-        Shopping Cart
-      </h1>
+    <>
+      <Head>
+        <title>Cart - SecretLab</title>
+      </Head>
 
-      <div className={classes.content}>
-        <div className={classes.items}>
-          <CartItems />
-        </div>
+      <div id="cartPage" className={classes.wrapper}>
+        <h1 className={classes.title} data-testid="title">
+          Shopping Cart
+        </h1>
 
-        <div className={classes.breakDown}>
-          <CartSummary />
+        <div className={classes.content}>
+          <div className={classes.items}>
+            <CartItems />
+          </div>
+
+          <div className={classes.breakDown}>
+            <CartSummary />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

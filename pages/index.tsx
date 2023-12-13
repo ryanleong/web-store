@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head'
 import React, { useEffect } from 'react';
 
 import { useStore } from '@/store';
@@ -22,16 +23,21 @@ const HomePage: NextPage<{}> = () => {
   if (isLoadingCategories) return null
 
   return (
-    <div id="HomePage" className={classes.wrapper}>
-      <div className={classes.header}>
-        <h1 className={classes.title} data-testid='title'>Products ({productsCount})</h1>
-      </div>
+    <>
+      <Head>
+        <title>Home - SecretLab</title>
+      </Head>
+      <div id="HomePage" className={classes.wrapper}>
+        <div className={classes.header}>
+          <h1 className={classes.title} data-testid='title'>Products ({productsCount})</h1>
+        </div>
 
-      <div className={classes.content}>
-        <ProductsFilter />
-        <Products />
+        <div className={classes.content}>
+          <ProductsFilter />
+          <Products />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

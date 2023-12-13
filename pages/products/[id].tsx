@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
@@ -58,30 +59,36 @@ const ProductDetails: NextPage<{}> = () => {
   };
 
   return (
-    <Loader isLoading={isLoading}>
-      {product?.id ? (
-        <motion.main
-          className={`${classes.wrapper} ${classes.wrapperDesktop}`}
-          initial="initial"
-          animate="animate"
-          variants={{
-            initial: { opacity: 0 },
-            animate: { opacity: 1 },
-          }}
-        >
-          <div
-            className={`${classes.imageContainer} ${classes.imageContainerDesktop}`}
+    <>
+      <Head>
+        <title>{ product?.name } - SecretLab</title>
+      </Head>
+
+      <Loader isLoading={isLoading}>
+        {product?.id ? (
+          <motion.main
+            className={`${classes.wrapper} ${classes.wrapperDesktop}`}
+            initial="initial"
+            animate="animate"
+            variants={{
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+            }}
           >
-            <ProductImage images={product.images} altText={product.name} />
-          </div>
-          <div className={classes.contentContainer}>
-            <ProductContent product={product} />
-          </div>
-        </motion.main>
-      ) : (
-        renderNoProduct()
-      )}
-    </Loader>
+            <div
+              className={`${classes.imageContainer} ${classes.imageContainerDesktop}`}
+            >
+              <ProductImage images={product.images} altText={product.name} />
+            </div>
+            <div className={classes.contentContainer}>
+              <ProductContent product={product} />
+            </div>
+          </motion.main>
+        ) : (
+          renderNoProduct()
+        )}
+      </Loader>
+    </>
   );
 };
 
