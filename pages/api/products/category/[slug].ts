@@ -8,12 +8,12 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) => {
-  const { category } = req?.query || {};
+  const { slug } = req?.query || {};
 
-  if (req.method === 'GET' && category) {
+  if (req.method === 'GET' && slug) {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/products/category/${category}`
+        `${process.env.NEXT_PUBLIC_API_URL}/products/category/${slug}`
       );
       if (!response.ok) {
         throw new Error(`${response.statusText}`, { cause: response });

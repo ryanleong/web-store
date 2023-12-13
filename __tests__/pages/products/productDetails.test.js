@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import ProductDetails from '@/pages/products/[id]';
 import { mockProduct } from '@/config/tests/mocks';
 
-jest.mock('@/api/useApi', () => () => ({
+jest.mock('@/hooks/useApi', () => () => ({
   fetchProduct: jest.fn(() => mockProduct),
   fetchProducts: jest.fn(),
   fetchCategories: jest.fn(),

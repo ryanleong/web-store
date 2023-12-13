@@ -1,11 +1,11 @@
-import productByCategoryApi from '@/pages/api/products/category/[category]';
+import productByCategoryApi from '@/pages/api/products/category/[slug]';
 
-describe('api/products/category/[id]', () => {
+describe('api/products/category/[slug]', () => {
   it('should return 404 is method is not GET', () => {
     const json = jest.fn();
     const status = jest.fn(() => ({ json }));
     const res = { status };
-    const req = { method: 'POST', query: { category: 'food' } };
+    const req = { method: 'POST', query: { slug: 'food' } };
 
     productByCategoryApi(req, res);
     expect(status).toHaveBeenCalledWith(404);
@@ -25,7 +25,7 @@ describe('api/products/category/[id]', () => {
     const json = jest.fn();
     const status = jest.fn(() => ({ json }));
     const res = { status };
-    const req = { method: 'GET', query: { category: 'food' } };
+    const req = { method: 'GET', query: { slug: 'food' } };
 
     await productByCategoryApi(req, res);
 
@@ -48,7 +48,7 @@ describe('api/products/category/[id]', () => {
     const json = jest.fn();
     const status = jest.fn(() => ({ json }));
     const res = { status };
-    const req = { method: 'GET', query: { category: 'food' } };
+    const req = { method: 'GET', query: { slug: 'food' } };
 
     await productByCategoryApi(req, res);
     expect(status).toHaveBeenCalledWith(500);

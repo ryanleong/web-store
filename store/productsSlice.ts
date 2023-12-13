@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 
 import { FetchAllProductOptions, FilterSlice, ProductsSlice } from './types';
 import { kebabToText } from '@/utils/string';
-import useApi from '@/api/useApi';
+import useApi from '@/hooks/useApi';
 import { getFilteredProducts, productResponseToProduct } from '@/utils/product';
 
 const defaultValues = {

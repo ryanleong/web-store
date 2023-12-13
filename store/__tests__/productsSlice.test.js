@@ -1,10 +1,10 @@
 import { mockProduct } from '../../config/tests/mocks';
 import productsSlice from '../productsSlice';
-import useApi from '@/api/useApi';
+import useApi from '@/hooks/useApi';
 import { FilterType } from '../types';
 import { mockAPIProduct } from '@/config/tests/mocks';
 
-jest.mock('@/api/useApi');
+jest.mock('@/hooks/useApi');
 
 describe('productsSlice', () => {
   describe('#fetchAllProducts', () => {

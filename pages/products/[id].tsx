@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
 import { useStore } from '@/store';
-import useApi from '@/api/useApi';
+import useApi from '@/hooks/useApi';
 import { Product } from '@/store/types';
 import { productResponseToProduct } from '@/utils/product';
 import ProductImage from '@/components/ProductDetails/ProductImage';
