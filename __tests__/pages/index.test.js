@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 
 import { useStore } from '@/store';
-import HomePage from '../index';
+import HomePage from '@/pages/index';
 
 jest.mock('@/store');
 jest.mock('@/components/ProductsListing/ProductsFilter/ProductsFilter', () => {

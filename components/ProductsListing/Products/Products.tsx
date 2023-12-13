@@ -3,17 +3,20 @@ import React, { useEffect } from 'react';
 import { FilterType } from '@/store/types';
 import { useStore } from '@/store';
 import ProductCard from './ProductCard';
+import Loader from '@/components/Common/Loader';
 
 interface ProductsProps {}
 
 const classes = {
   productsWrapper: 'px-0 grid grid-flow-row gap-x-4 gap-y-8 grid-cols-2',
-  productsWrapperDesktop: 'md:w-screen md:px-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
-  loaderWrapper: 'w-full flex justify-center mt-40',
-}
+  productsWrapperDesktop:
+    'md:px-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
+  noDataWrapper: 'w-full flex justify-center mt-40',
+};
 
 const Products: React.FC<ProductsProps> = () => {
-  const { filterValues, fetchProducts, filteredProducts, isLoadingProducts } = useStore();
+  const { filterValues, fetchProducts, filteredProducts, isLoadingProducts } =
+    useStore();
   const category = filterValues[FilterType.CATEGORY];
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const Products: React.FC<ProductsProps> = () => {
 
   /**
    * Renders the products based on the filter values
-   * @returns void
+   * @returns
    */
   const renderProducts = () => {
     return filteredProducts.map((product) => {
@@ -41,27 +44,31 @@ const Products: React.FC<ProductsProps> = () => {
     });
   };
 
-  if (isLoadingProducts) {
+  /**
+   * Renders the no products found message
+   * @returns
+   */
+  const renderNoProducts = () => {
     return (
-      <div className={classes.loaderWrapper} data-testid='loader'>
-        <h2>Loading...</h2>
-      </div>
-    )
-  }
-
-  if (filteredProducts.length === 0) {
-    return (
-      <div className={classes.loaderWrapper} data-testid='empty'>
+      <div className={classes.noDataWrapper} data-testid="empty">
         <h2>No Products Found</h2>
       </div>
-    )
-  }
+    );
+  };
 
   return (
-    <div className={`${classes.productsWrapper} ${classes.productsWrapperDesktop}`}>
-      { renderProducts()}
-    </div>
-  )
+    <Loader isLoading={isLoadingProducts}>
+      {filteredProducts.length === 0 ? (
+        renderNoProducts()
+      ) : (
+        <div
+          className={`${classes.productsWrapper} ${classes.productsWrapperDesktop}`}
+        >
+          {renderProducts()}
+        </div>
+      )}
+    </Loader>
+  );
 };
 
 export default Products;

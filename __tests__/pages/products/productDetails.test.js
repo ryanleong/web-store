@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-import ProductDetails from '../[id]';
-import { mockProduct } from '../../../config/tests/mocks';
+import ProductDetails from '@/pages/products/[id]';
+import { mockProduct } from '@/config/tests/mocks';
 
 jest.mock('@/api/useApi', () => () => ({
   fetchProduct: jest.fn(() => mockProduct),

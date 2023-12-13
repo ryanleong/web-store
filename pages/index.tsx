@@ -9,7 +9,7 @@ const classes = {
   wrapper: 'py-8',
   header: 'flex align-middle px-4 mb-4',
   title: 'text-2xl',
-  content: 'relative w-full flex px-4',
+  content: 'relative w-full flex px-4 justify-center',
 }
 
 const HomePage: NextPage<{}> = () => {
@@ -19,9 +19,7 @@ const HomePage: NextPage<{}> = () => {
     fetchCategories();
   }, [fetchCategories]);
 
-  if (isLoadingCategories) {
-    return <div>Loading...</div>;
-  }
+  if (isLoadingCategories) return null
 
   return (
     <div id="HomePage" className={classes.wrapper}>

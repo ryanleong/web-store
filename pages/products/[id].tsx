@@ -8,13 +8,16 @@ import { Product } from '@/store/types';
 import { productResponseToProduct } from '@/utils/product';
 import ProductImage from '@/components/ProductDetails/ProductImage';
 import ProductContent from '@/components/ProductDetails/ProductContent';
+import Loader from '@/components/Common/Loader';
 
 const classes = {
   wrapper: 'container mx-auto px-4 py-8',
   wrapperDesktop: 'lg:gap-4 lg:flex',
   imageContainer: 'mb-6',
-  imageContainerDesktop: 'md:basis-[500px] xl:basis-[700px] 2xl:basis-[900px] grow-0 shrink-0 lg:mb-0',
+  imageContainerDesktop:
+    'md:basis-[500px] xl:basis-[700px] 2xl:basis-[900px] grow-0 shrink-0 lg:mb-0',
   contentContainer: 'px-4 w-full',
+  noProduct: 'w-full flex justify-center mt-40',
 };
 
 const ProductDetails: NextPage<{}> = () => {
@@ -23,35 +26,53 @@ const ProductDetails: NextPage<{}> = () => {
   const { getProductById } = useStore();
   const { fetchProduct } = useApi();
   const [product, setProduct] = useState<Product>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (productId) init();
   }, [productId]);
 
   const init = async () => {
-    let product = getProductById(productId as string);
-
-    if (!product) {
-      const response = await fetchProduct(productId as string);
-      product = productResponseToProduct(response);
+    try {
+      setIsLoading(true);
+      let product = getProductById(productId as string);
+      if (!product) {
+        const response = await fetchProduct(productId as string);
+        product = productResponseToProduct(response);
+      }
+      setProduct(product);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setProduct(product);
   };
 
-  if (!product) return <div data-testid="loading">Loading...</div>;
+  const renderNoProduct = () => {
+    return (
+      <div className={classes.noProduct} data-testid="empty">
+        <h2>No Product Found</h2>
+      </div>
+    );
+  };
 
   return (
-    <div className={`${classes.wrapper} ${classes.wrapperDesktop}`}>
-      <div
-        className={`${classes.imageContainer} ${classes.imageContainerDesktop}`}
-      >
-        <ProductImage images={product.images} altText={product.name} />
-      </div>
-      <div className={classes.contentContainer}>
-        <ProductContent product={product} />
-      </div>
-    </div>
+    <Loader isLoading={isLoading}>
+      {product?.id ? (
+        <div className={`${classes.wrapper} ${classes.wrapperDesktop}`}>
+          <div
+            className={`${classes.imageContainer} ${classes.imageContainerDesktop}`}
+          >
+            <ProductImage images={product.images} altText={product.name} />
+          </div>
+          <div className={classes.contentContainer}>
+            <ProductContent product={product} />
+          </div>
+        </div>
+      ) : (
+        renderNoProduct()
+      )}
+    </Loader>
   );
 };
 

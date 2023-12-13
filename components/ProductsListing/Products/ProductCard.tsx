@@ -16,7 +16,7 @@ interface ProductCardProps {
 
 const classes = {
   wrapper: 'flex flex-col',
-  image: 'relative w-full h-44 sm:h-52 md:h-72 aspect-video',
+  image: 'relative w-full h-44 sm:h-52 md:h-72 mb-2 aspect-video',
   title: 'text-xl font-medium',
   brand: 'text-sm text-gray-500',
   price: 'flex align-middle',

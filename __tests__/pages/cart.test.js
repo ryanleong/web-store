@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import CartPage from '../cart';
+import CartPage from '@/pages/cart';
 
 jest.mock('@/components/Cart/CartSummary', () => {
   const MockComponent = () => <div data-testid="cart-summary">toggle</div>;

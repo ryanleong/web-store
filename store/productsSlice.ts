@@ -57,6 +57,7 @@ const createProductsSlice: StateCreator<
       return formattedProducts;
     } catch (error) {
       console.log('Error: ', error);
+      set(() => ({ isLoadingProducts: false }));
     }
   };
 
@@ -81,6 +82,7 @@ const createProductsSlice: StateCreator<
       return categories;
     } catch (error) {
       console.log('Error: ', error);
+      set(() => ({ isLoadingCategories: false }));
     }
   };
 
