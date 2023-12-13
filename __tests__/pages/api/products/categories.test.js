@@ -1,6 +1,6 @@
-import categoryApi from '@/pages/api/products/category/index';
+import categoryApi from '@/pages/api/products/categories';
 
-describe('api/products/category/index', () => {
+describe('api/products/categories', () => {
   it('should return 404 is method is not GET', () => {
     const json = jest.fn();
     const status = jest.fn(() => ({ json }));
