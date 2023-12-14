@@ -13,7 +13,7 @@ const handler = async (
   if (req.method === 'GET' && slug) {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/products/category/${slug}`
+        `${process.env.API_URL}/products/category/${slug}`
       );
       if (!response.ok) {
         throw new Error(`${response.statusText}`, { cause: response });

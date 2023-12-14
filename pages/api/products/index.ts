@@ -10,7 +10,7 @@ const handler = async (
 ) => {
   if (req.method === 'GET') {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+      const response = await fetch(`${process.env.API_URL}/products`);
       if (!response.ok) {
         throw new Error(`${response.statusText}`, { cause: response });
       }
