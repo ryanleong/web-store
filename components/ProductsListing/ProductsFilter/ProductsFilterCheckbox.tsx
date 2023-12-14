@@ -10,7 +10,7 @@ export interface ProductsFilterCheckboxProps {
 }
 
 const classes = {
-  wrapper: 'border-b-2 mb-4 w-full',
+  wrapper: 'border-b-2 sm:border-b-0 md:border-b-2 mb-4 w-full',
   title: 'font-semibold mb-3.5 uppercase',
   fieldSet: 'flex flex-col mb-4',
   inputWrapper: 'flex align-center cursor-pointer',

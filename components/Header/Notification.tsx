@@ -8,7 +8,7 @@ interface NotificationProps {}
 
 const classes = {
   cartNotification:
-    'w-80 p-5 bg-white absolute top-20 right-0 rounded-md shadow-[0_0px_20px_0px_rgba(0,0,0,0.2)] transition-all pointer-events-none opacity-0',
+    'w-80 p-5 bg-white absolute top-20 right-4 rounded-md shadow-[0_0px_20px_0px_rgba(0,0,0,0.2)] transition-all pointer-events-none opacity-0',
   cartNotificationShow: 'opacity-100',
   cartNotificationTitle: 'flex align-center gap-1',
 };

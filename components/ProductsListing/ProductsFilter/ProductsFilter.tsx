@@ -12,8 +12,8 @@ interface ProductsFilterProps {}
 const classes = {
   wrapper: 'md:basis-56 grow-0 shrink-0',
   content:
-    'w-screen fixed left-0 z-20 px-4 py-6 bg-white transition-all h-screen flex flex-col',
-  contentDesktop: 'md:w-auto md:relative md:px-0 md:py-0 md:h-auto',
+    'w-screen fixed left-0 z-40 px-4 py-6 bg-white transition-all h-[75vh] flex flex-col shadow-[0_-3px_16px_-2px_rgba(0,0,0,0.3)]',
+  contentDesktop: 'md:w-auto md:relative md:z-0 md:px-0 md:py-0 md:h-auto md:shadow-none',
   title: 'text-2xl mb-4',
   filterWrapper: 'overflow-y-auto sm:flex md:block',
   mobileButtons: 'flex gap-4 mt-auto pt-4 md:pt-0',
@@ -42,7 +42,7 @@ const ProductsFilter: React.FC<ProductsFilterProps> = () => {
 
   const activeMobileFilterClass = mobileFilterActive
     ? 'bottom-0 md:bottom-auto'
-    : '-bottom-full md:bottom-auto';
+    : '-bottom-[150%] md:bottom-auto';
 
   return (
     <div className={classes.wrapper}>
