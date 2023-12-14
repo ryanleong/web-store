@@ -11,15 +11,17 @@ interface ProductCtaProps {
 
 const classes = {
   wrapper: 'mt-10 lg:mt-20',
-  quantityWrapper: 'flex mb-6',
+  quantityWrapper: 'flex mb-1',
   quantity: 'ml-auto',
+  notice: 'text-sm text-gray-500 mb-6',
   labelQuanity: 'text-xl font-semibold',
 };
 
 const ProductCta: React.FC<ProductCtaProps> = (props) => {
   const { product } = props;
-  const { addItemToCart } = useStore();
+  const { addItemToCart, getCartItemQuantity } = useStore();
   const [quantity, setQuantity] = useState(1);
+  const currentQuantity = getCartItemQuantity(product.id);
 
   return (
     <div className={classes.wrapper}>
@@ -34,6 +36,7 @@ const ProductCta: React.FC<ProductCtaProps> = (props) => {
           />
         </div>
       </div>
+      <p className={classes.notice}>You currently have {currentQuantity} in cart.</p>
 
       <InputButton
         label="Add to cart"

@@ -7,6 +7,7 @@ import {
   NotificationSlice,
   RemoveItemFromCart,
   UpdateCartItemQuantity,
+  GetCartItemQuantity,
 } from './types';
 import {
   calculateTotalPriceOfCart,
@@ -156,6 +157,19 @@ const createCartSlice: StateCreator<
     return total;
   };
 
+  /**
+   * Get quantity of item in cart
+   * @param productId
+   * @returns number
+   */
+  const getCartItemQuantity: GetCartItemQuantity = (productId) => {
+    const cartItems = get().cartItems;
+    const item = cartItems.find(
+      (cartItem) => cartItem.product.id === productId
+    );
+    return item ? item.quantity : 0;
+  };
+
   return {
     cartItems: [],
     totalPrice: 0,
@@ -164,6 +178,7 @@ const createCartSlice: StateCreator<
     removeItemFromCart,
     updateCartItemQuantity,
     getCartItemCount,
+    getCartItemQuantity,
   };
 };
 

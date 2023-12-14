@@ -79,6 +79,7 @@ export type CartItem = {
 export type AddItemToCart = (product: Product, quantity?: number) => void;
 export type RemoveItemFromCart = (productId: number) => void;
 export type UpdateCartItemQuantity = (productId: number, quantity: number) => void;
+export type GetCartItemQuantity = (id: number) => number;
 
 export type CartSlice = {
   cartItems: Array<CartItem>;
@@ -88,6 +89,7 @@ export type CartSlice = {
   removeItemFromCart: RemoveItemFromCart;
   updateCartItemQuantity: UpdateCartItemQuantity;
   getCartItemCount: () => number;
+  getCartItemQuantity: GetCartItemQuantity;
 };
 
 /**

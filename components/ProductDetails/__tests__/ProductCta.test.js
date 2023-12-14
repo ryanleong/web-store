@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useStore } from '@/store';
 import ProductCta from '../ProductCta';
-import mockProduct from '@/config/tests/mocks';
+import { mockProduct, mockCartItem } from '@/config/tests/mocks';
 
 jest.mock('@/store');
 
@@ -13,6 +13,7 @@ describe('ProductCta', () => {
   beforeEach(() => {
     useStore.mockReturnValue({
       addItemToCart: mockAddItemToCart,
+      getCartItemQuantity: jest.fn().mockReturnValue(mockCartItem.quantity),
     });
   });
 
@@ -20,6 +21,9 @@ describe('ProductCta', () => {
     const { getByText } = render(<ProductCta product={mockProduct} />);
     expect(getByText('Quantity')).toBeInTheDocument();
     expect(getByText('Add to cart')).toBeInTheDocument();
+    expect(
+      getByText(`You currently have ${mockCartItem.quantity} in cart.`)
+    ).toBeInTheDocument();
   });
 
   it('calls addItemToCart when "Add to cart" button is clicked', () => {

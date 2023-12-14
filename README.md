@@ -32,7 +32,7 @@ npm run dev
 - In the interest of time, TailwindCSS was used for styling.
 - **Framer motion** was also used for page and component transitions
 
-# Design
+# Design and UX
 - The design takes inspiration from the Nike website and Secretlab
   - This provided a good starting point for a good UX experience for the end user
 - Images provided by Dummyjson aren't the best, which brings the design down

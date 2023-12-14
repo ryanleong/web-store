@@ -145,4 +145,19 @@ describe('cartSlice', () => {
       expect(result).toBe(4);
     });
   });
+
+  describe('#getCartItemQuantity', () => {
+    let mockState = {
+      totalPrice: 339,
+      cartItems: mockCart,
+    };
+
+    const get = () => mockState;
+    const store = cartSlice(() => {}, get);
+
+    it('should return total number of items in cart', () => {
+      const result = store.getCartItemQuantity(10);
+      expect(result).toBe(3);
+    });
+  });
 });
