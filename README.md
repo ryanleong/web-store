@@ -52,3 +52,6 @@ npm run dev
 - Routes to persist product filtering
   - ie. `/products/category/${category_slug}?rating=4`
   - This will allow users to persist their current filtering
+- Integration/End to end test
+  - This would give us better coverage on how the app functions as a whole
+

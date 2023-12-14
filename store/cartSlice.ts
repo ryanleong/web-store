@@ -39,10 +39,6 @@ const createCartSlice: StateCreator<
    * @param product
    */
   const addItemToCart: AddItemToCart = (product, quantity = 1) => {
-    // API call would be made here to persist the cart items.
-    // For this demo, we will just store the cart items in memory
-    // as the mock API does not persist the data
-
     set((state) => {
       const { cartItems, pushNotification } = state;
       let updatedCartItems = cartItems;
@@ -76,6 +72,10 @@ const createCartSlice: StateCreator<
 
       const totalPrice = calculateTotalPriceOfCart(updatedCartItems);
       const finalCart = { totalPrice, cartItems: updatedCartItems };
+
+      // API call would be made here to persist the cart items.
+      // For this demo, we will just store the cart items in localStorage
+      // as the mock API does not persist the data
       toLocalStorage(CART_STORAGE_KEY, finalCart);
       return { ...state, ...finalCart };
     });
@@ -86,10 +86,6 @@ const createCartSlice: StateCreator<
    * @param productId
    */
   const removeItemFromCart: RemoveItemFromCart = (productId) => {
-    // API call would be made here to persist the cart items.
-    // For this demo, we will just store the cart items in memory
-    // as the mock API does not persist the data
-
     set((state) => {
       const { cartItems } = state;
 
@@ -99,6 +95,10 @@ const createCartSlice: StateCreator<
 
       const totalPrice = calculateTotalPriceOfCart(updatedCartItems);
       const finalCart = { totalPrice, cartItems: updatedCartItems };
+
+      // API call would be made here to persist the cart items.
+      // For this demo, we will just store the cart items in localStorage
+      // as the mock API does not persist the data
       toLocalStorage(CART_STORAGE_KEY, finalCart);
       return { ...state, ...finalCart };
     });
@@ -113,10 +113,6 @@ const createCartSlice: StateCreator<
     productId,
     quantity
   ) => {
-    // API call would be made here to persist the cart items.
-    // For this demo, we will just store the cart items in memory
-    // as the mock API does not persist the data
-
     set((state) => {
       const { cartItems } = state;
 
@@ -137,6 +133,10 @@ const createCartSlice: StateCreator<
 
       const totalPrice = calculateTotalPriceOfCart(updatedCartItems);
       const finalCart = { totalPrice, cartItems: updatedCartItems };
+
+      // API call would be made here to persist the cart items.
+      // For this demo, we will just store the cart items in localStorage
+      // as the mock API does not persist the data
       toLocalStorage(CART_STORAGE_KEY, finalCart);
       return { ...state, ...finalCart };
     });
