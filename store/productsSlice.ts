@@ -3,7 +3,7 @@ import { StateCreator } from 'zustand';
 import { FetchAllProductOptions, FilterSlice, ProductsSlice } from './types';
 import { kebabToText } from '@/utils/string';
 import useApi from '@/hooks/useApi';
-import { getFilteredProducts, productResponseToProduct } from '@/utils/product';
+import { getFilteredProducts, productResponseToProduct, sortProducts } from '@/utils/product';
 
 const defaultValues = {
   products: [],
@@ -43,10 +43,11 @@ const createProductsSlice: StateCreator<
           formattedProducts,
           state.filterValues
         );
+        const sortedProducts = sortProducts(filteredProducts, state.sortValue);
 
         return {
           products: formattedProducts,
-          filteredProducts,
+          filteredProducts: sortedProducts,
           isLoadingProducts: false,
           // NOTE: using limit as we don't have pagination and its the current total
           productsCount: filteredProducts.length,
