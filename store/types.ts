@@ -14,17 +14,27 @@ export interface FilterValues {
   [FilterType.PRICE]: Array<string>;
 }
 
+export enum SortValue {
+  PRICE_LOW_TO_HIGH = 'price_low_to_high',
+  PRICE_HIGH_TO_LOW = 'price_high_to_low',
+}
+
 export type IntialiseFilterValues = () => void;
 
 export type SetFilterValue = (
   filterType: FilterType,
   value: string | Array<string>
 ) => void;
+
+export type SetSortValue = (sortValue: SortValue) => void;
+
 export interface FilterSlice {
   filterValues: FilterValues;
+  sortValue: SortValue;
   hasBeenInitialized: boolean;
   intialiseFilterValues: IntialiseFilterValues;
   setFilterValue: SetFilterValue;
+  setSortValue: SetSortValue;
 }
 
 /**

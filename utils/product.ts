@@ -1,4 +1,4 @@
-import { FilterType, FilterValues, Product } from '@/store/types';
+import { FilterType, FilterValues, Product, SortValue } from '@/store/types';
 import { PRODUCT_PRICE_RANGE } from '../config/constants';
 
 /**
@@ -52,6 +52,24 @@ const getFilteredProducts = (
   });
 };
 
+const sortProducts = (
+  products: Array<Product>,
+  sortValue: SortValue
+) => {
+  const sortedProducts = products.sort((productA, productB) => {
+    const priceA = productA.discountedPrice || productA.price;
+    const priceB = productB.discountedPrice || productB.price;
+
+    if (sortValue === SortValue.PRICE_LOW_TO_HIGH) {
+      return priceA - priceB;
+    }
+
+    return priceB - priceA;
+  });
+
+  return sortedProducts;
+}
+
 /**
  * Convert product API response to product Object
  * @param product
@@ -95,6 +113,7 @@ export {
   isInRating,
   isInPriceRange,
   getFilteredProducts,
+  sortProducts,
   productResponseToProduct,
   calculateDiscountedPrice,
 };

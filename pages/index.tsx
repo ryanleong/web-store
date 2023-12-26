@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useStore } from '@/store';
 import ProductsFilter from '@/components/ProductsListing/ProductsFilter/ProductsFilter';
 import Products from '@/components/ProductsListing/Products/Products';
+import ProductsSort from '@/components/ProductsListing/ProductsFilter/ProductsSort';
 
 const classes = {
   wrapper: 'py-8',
@@ -30,6 +31,8 @@ const HomePage: NextPage<{}> = () => {
       <div id="HomePage" className={classes.wrapper}>
         <div className={classes.header}>
           <h1 className={classes.title} data-testid='title'>Products ({productsCount})</h1>
+
+          <ProductsSort />
         </div>
 
         <div className={classes.content}>
